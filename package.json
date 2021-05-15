@@ -1,0 +1,62 @@
+{
+  "name": "api-test-pipeline-web",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.1",
+    "bootstrap": "^5.0.1",
+    "classnames": "^2.3.1",
+    "dayjs": "^1.10.4",
+    "lodash-es": "^4.17.21",
+    "react": "^17.0.2",
+    "react-app-polyfill": "^2.0.0",
+    "react-bootstrap": "^1.6.0",
+    "react-bootstrap-icons": "^1.5.0",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "sass": "^1.32.13",
+    "web-vitals": "^1.1.2"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && node s3upload.js"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "rules": {
+      "@typescript-eslint/no-unused-vars": "off",
+      "import/no-anonymous-default-export": "off",
+      "react-hooks/exhaustive-deps": "off",
+      "no-unused-vars": "off"
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all",
+      "ie 11"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version",
+      "ie 11"
+    ]
+  },
+  "devDependencies": {
+    "@craco/craco": "^6.1.2",
+    "craco-alias": "^2.2.0",
+    "craco-plugin-scoped-css": "^1.1.1",
+    "s3-spa-upload": "^1.1.6"
+  }
+}
