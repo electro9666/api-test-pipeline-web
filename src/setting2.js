@@ -1,44 +1,14 @@
-import axios from 'axios';
+import { CHECK } from '@/util/check';
+import { api } from '@/util/api';
+import { cloneTask, setBasicFnToTask, setBasicFnToGroup } from '@/util/taskUtil';
 import { find } from 'lodash-es';
 
-const CHECK = {
-  STATUS200: ({res, errorRes}) => {
-    return res?.status === 200;
-  },
-  STATUS400: ({res, errorRes}) => {
-    return errorRes?.status === 400;
-  },
-  STATUS401: ({res, errorRes}) => {
-    return errorRes?.status === 401;
-  },
-  STATUS402: ({res, errorRes}) => {
-    return errorRes?.status === 402;
-  },
-  STATUS403: ({res, errorRes}) => {
-    return errorRes?.status === 403;
-  }
-}
-const makeInstance = () => { 
-  return axios.create({
-    timeout: 5000,
-    baseURL: 'http://localhost:8080',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-}
-
-export const api = {
-  login: ({instance, params}) => instance.post('/api/common/login', params),
-  recent: ({instance, params}) => instance.get(`/api/secure/user/recent`),
-  listStore: ({instance, params}) => instance.get(`/api/secure/seller/store/list`),
-  postStore: ({instance, params}) => instance.post(`/api/secure/seller/store`, params)
-}
-
-
 const storeName = '스토어-' + Date.now();
+
 /**
+ * 공통 테스크
  * 필수
+ * id: id가 있어야 TASK_GROUP_DEFAULT에서 찾을 수 있다.
  * title
  * action
  * 
@@ -49,15 +19,15 @@ const storeName = '스토어-' + Date.now();
  * 옵션
  * instance
  */
-const TASK_MAP_DEFAULT = {
-  A: {
+const COMMON_TASK = [/*{
+    id: 'A',
     title: 'A',
     action: ({params}) => {
       return 'A1';
     },
     check: ({res, errorRes}) => res === 'A1'
-  },
-  B: {
+  }, {
+    id: 'B',
     title: 'B',
     paramsFn: ({beforeTask}) => {
       return {beforeTask};
@@ -66,135 +36,177 @@ const TASK_MAP_DEFAULT = {
       return {data: 'B1' + params.beforeTask.res};
     },
     check: ({res, errorRes}) => res.data === 'A1'
-  },
-  C: {
+  }, {
+    id: 'C',
     title: 'C',
     action: ({params}) => {
       return {data: 'C1'};
     },
     check: CHECK.STATUS200
-  },
-  loginUserFail: {
-    title: '사용자(user1) 로그인(실패)',
-    paramsFn: ({beforeTask}) => ({username: 'user1', password: 'xxxx'}),
+  },  */{
+    id: 'loginUser4',
+    title: '사용자(user4) 로그인',
+    paramsFn: ({beforeTask}) => ({username: 'user4', password: '1111'}),
     action: api.login,
-    check: CHECK.STATUS401
-  },
-  loginUserSuccess: {
+    afterActionForInstance: ({instance, res, errorRes}) => {
+      instance.defaults.headers.common.Authorization = `Bearer ${res?.data}`;
+    }
+  }, {
+    id: 'loginUser1',
     title: '사용자(user1) 로그인',
     paramsFn: ({beforeTask}) => ({username: 'user1', password: '1111'}),
     action: api.login,
     afterActionForInstance: ({instance, res, errorRes}) => {
       instance.defaults.headers.common.Authorization = `Bearer ${res?.data}`;
     }
-  },
-  loginSellerSuccess: {
+  }, {
+    id: 'loginSellerSuccess',
     title: '판매자(user3) 로그인',
     paramsFn: ({beforeTask}) => ({username: 'user3', password: '1111'}),
     action: api.login,
     afterActionForInstance: ({instance, res, errorRes}) => {
       instance.defaults.headers.common.Authorization = `Bearer ${res?.data}`;
     }
-  },
-  recentSuccess: {
-    title: '최근 상품 목록 조회',
-    action: api.recent
-  },
-  postStore: {
-    title: '스토어 등록',
-    paramsFn: ({beforeTask}) => ({name: storeName, status: 'OPEN'}),
-    action: api.postStore
-  },
-  postStoreFail1: {
-    title: '스토어 등록 실패(동일한 이름)',
-    paramsFn: ({beforeTask}) => ({name: storeName, status: 'OPEN'}),
-    action: api.postStore,
-    check: CHECK.STATUS400
-  },
-  postStoreFail2: {
-    title: '스토어 등록 실패(이름이 없음)',
-    paramsFn: ({beforeTask}) => ({status: 'OPEN'}),
-    action: api.postStore,
-    check: CHECK.STATUS400
-  },
-  postStoreFail3: {
-    title: '스토어 등록 실패(상태가 없음)',
-    paramsFn: ({beforeTask}) => ({name: 'A'}),
-    action: api.postStore,
-    check: CHECK.STATUS400
-  },
-  postStoreFail4: {
-    title: '스토어 등록 실패(잘못된 상태값)',
-    paramsFn: ({beforeTask}) => ({status: 'A'}),
-    action: api.postStore,
-    check: CHECK.STATUS400
-  },
-  listStore1: {
-    title: '스토어 조회',
-    paramsFn: ({beforeTask}) => ({}),
-    action: api.listStore,
-  },
-  postStore2: {
-    title: '스토어 등록',
-    paramsFn: ({beforeTask}) => ({name: '스토어-' + Date.now(), status: 'OPEN', temp: beforeTask.res.data.total}),
-    action: api.postStore
-  },
-  listStore2: {
-    title: '스토어 조회(개수 1개 증가 확인)',
-    paramsFn: ({beforeTask}) => ({}),
-    action: api.listStore,
-    check: ({res, errorRes, group}) => {
-      const task = find(group.taskList, {key: 'listStore1'});
-      return res.data.total === task?.res?.data?.total + 1;
-    }
-  },
-}
-// default setting
-Object.keys(TASK_MAP_DEFAULT).forEach(k => { // 검색할 때 사용
-  const task = TASK_MAP_DEFAULT[k];
-  task.key = k;
-  if (!task.hasOwnProperty('check')) {
-    task.check = CHECK.STATUS200;
   }
-})
-export const TASK_MAP = TASK_MAP_DEFAULT;
+];
 
 /**
- * 기본값
+ * 필수
+ * title
+ * 
+ * taskList내의 필수
+ * id는 비필수(같은 그룹내에서 참조하는 경우 필요.)
+ * title
+ * action
+ * 
+ * 기본값(자동)
  * instance: makeInstance()
  * 
  * 나중에 할당
- * taskList: [....], // 나중에 taskKeyList에서 실제 task를 찾아서 자동으로 구성
+ * taskList: string으로 된 부분은 COMMON_TASK에서 찾아서 deepClone해서 사용함.
  */
 export const TASK_GROUP_DEFAULT = [/* {
   title: 'TASK GROUP1',
-  taskKeyList: ['A', 'B', 'C'],
+  taskList: ['A', 'B', 'C'],
 }, {
   title: 'TASK GROUP2',
-  taskKeyList: ['A', 'B', 'C'],
+  taskList: ['A', 'B', 'C'],
 }, {
   title: 'TASK GROUP3',
-  taskKeyList: ['B', 'C'],
+  taskList: ['B', 'C'],
 },  */{
   title: '로그인 실패',
-  taskKeyList: ['loginUserFail'],
+  taskList: [{
+    title: '사용자(user1) 로그인 실패(잘못된 패스워드)',
+    paramsFn: ({beforeTask}) => ({username: 'user1', password: 'xxxx'}),
+    action: api.login,
+    check: CHECK.STATUS401
+  }, {
+    title: '사용자(user1) 로그인 실패(잘못된 username)',
+    paramsFn: ({beforeTask}) => ({username: 'user11111', password: '1111'}),
+    action: api.login,
+    check: CHECK.STATUS401
+  }, {
+    title: '사용자(user1) 로그인 실패(파라메터 없음)',
+    action: api.login,
+    check: CHECK.STATUS401
+  }],
 }, {
   title: '로그인',
-  taskKeyList: ['loginUserSuccess', 'recentSuccess'],
+  taskList: ['loginUser1',
+    {
+      title: '최근 상품 목록 조회',
+      action: api.recent
+    }
+  ],
+}, {
+  title: '판매자 권한이 없는 사용자로 로그인 후, 판매자 api 호출',
+  taskList: ['loginUser4',
+    {
+      title: '스토어 조회',
+      action: api.listStore,
+      check: CHECK.STATUS403
+    }
+  ],
 }, {
   title: '스토어 등록',
-  taskKeyList: ['loginSellerSuccess', 'postStore', 'postStoreFail1', 'postStoreFail2', 'postStoreFail3', 'postStoreFail4'],
+  taskList: ['loginSellerSuccess',
+    {
+      title: '스토어 등록',
+      paramsFn: ({beforeTask}) => ({name: storeName, status: 'OPEN'}),
+      action: api.postStore
+    }, {
+      title: '스토어 등록 실패(동일한 이름)',
+      paramsFn: ({beforeTask}) => ({name: storeName, status: 'OPEN'}),
+      action: api.postStore,
+      check: CHECK.STATUS400
+    }, {
+      title: '스토어 등록 실패(이름이 없음)',
+      paramsFn: ({beforeTask}) => ({status: 'OPEN'}),
+      action: api.postStore,
+      check: CHECK.STATUS400
+    }, {
+      title: '스토어 등록 실패(상태가 없음)',
+      paramsFn: ({beforeTask}) => ({name: 'A'}),
+      action: api.postStore,
+      check: CHECK.STATUS400
+    }, {
+      title: '스토어 등록 실패(잘못된 상태값)',
+      paramsFn: ({beforeTask}) => ({status: 'A'}),
+      action: api.postStore,
+      check: CHECK.STATUS400
+    }
+  ],
 }, {
   title: '스토어 등록 후 개수 조회',
-  taskKeyList: ['loginSellerSuccess', 'listStore1', 'postStore2', 'listStore2'],
+  taskList: ['loginSellerSuccess',
+    {
+      id: 'listStore1',
+      title: '스토어 조회',
+      action: api.listStore,
+    }, {
+      title: '스토어 등록',
+      paramsFn: ({beforeTask}) => ({name: '스토어-' + Date.now(), status: 'OPEN'}),
+      action: api.postStore
+    }, {
+      title: '스토어 조회(개수 1개 증가 확인)',
+      paramsFn: ({beforeTask}) => ({}),
+      action: api.listStore,
+      check: ({res, errorRes, group}) => {
+        const task = find(group.taskList, {id: 'listStore1'});
+        return res.data.total === task?.res?.data?.total + 1;
+      }
+    }
+  ],
+}, {
+  title: '상품 등록',
+  taskList: ['loginSellerSuccess',
+  ],
 }];
 
+TASK_GROUP_DEFAULT.forEach(group => {
+  if (!group.hasOwnProperty('taskList')) {
+    throw new Error('group should have taskList');
+  }
+  group.taskList.forEach((task, index) => {
+    if (typeof task === 'string') {
+      let taskObj = find(COMMON_TASK, {id: task});
+      if (!taskObj) {
+        throw new Error(`not found task${task}`);
+      }
+      setBasicFnToTask(taskObj);
+      taskObj = cloneTask(taskObj);
+      group.taskList[index] = taskObj; // string대신 taskObj로 대체하기
+    } else {
+      setBasicFnToTask(task);
+    }
+  })
+});
+
+// default
 Object.keys(TASK_GROUP_DEFAULT).forEach(k => {
   const group = TASK_GROUP_DEFAULT[k];
-  if (!group.hasOwnProperty('instance')) {
-    group.instance = makeInstance();
-  }
+  setBasicFnToGroup(group);
 });
 
 export const TASK_GROUP = TASK_GROUP_DEFAULT;
-
