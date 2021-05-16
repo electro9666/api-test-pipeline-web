@@ -141,6 +141,10 @@ export const TASK_GROUP_DEFAULT = [/* {
       action: api.postStore,
       check: CHECK.STATUS400
     }, {
+      title: '스토어 등록 실패(파라메터 없음)',
+      action: api.postStore,
+      check: CHECK.STATUS400
+    }, {
       title: '스토어 등록 실패(이름이 없음)',
       paramsFn: ({beforeTask}) => ({status: 'OPEN'}),
       action: api.postStore,
