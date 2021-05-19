@@ -6,4 +6,6 @@ export const api = {
   postProduct: ({instance, params}) => instance.post(`/api/secure/seller/product`, params),
   detailProduct: ({instance, params}) => instance.get(`/api/secure/seller/product/detail/${params.id}`),
   putProduct: ({instance, params}) => instance.put(`/api/secure/seller/product`, params),
+  detailProductUser: ({instance, params}) => instance.get(`/api/secure/user/product/${params.id}`),
+  postCart: ({instance, params}) => instance.post(`/api/secure/user/cart`, params),
 }

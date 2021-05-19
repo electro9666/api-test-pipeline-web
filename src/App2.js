@@ -2,7 +2,18 @@ import React, { Fragment, useState, useEffect } from 'react';
 import {TASK_GROUP} from './setting2.js';
 import { Container, Button, Badge } from 'react-bootstrap';
 import { ArrowRight } from 'react-bootstrap-icons';
+import { find } from 'lodash-es';
+import { CHECK, CHECK_FN } from '@/util/check';
 
+const getVariant = (task) => {
+  if (task.checkName === 'S200') {
+    return 'success';
+  } else if (task.checkName === 'custom') {
+    return 'secondary';
+  } else {
+    return 'warning';
+  }
+}
 const displayData = (d) => {
   if (typeof d === 'undefined') {
     return;
@@ -24,6 +35,9 @@ const run = async () => {
   for (let i = 0; i < TASK_GROUP.length; i++) {
     // if (i !== 11111) continue; // 예외처리
     const group = TASK_GROUP[i];
+    group['findTask'] = (id) => {
+      return find(group.taskList, {id}); // 같은 group내의 다른 task 찾기
+    }
     for (let j = 0; j < group.taskList.length; j++) {
       const task = group.taskList[j];
 
@@ -39,7 +53,16 @@ const run = async () => {
         task.errorRes = e?.response;
       } finally {
         console.log('task',task);
-        task.isPass = task.check({res: task.res, errorRes: task.errorRes, group});
+        if (typeof task.check === 'string') {
+          task.checkName = task.check;
+          const checkFn = CHECK_FN[task.check];
+          task.isPass = checkFn({res: task.res, errorRes: task.errorRes, group});
+        } else if (typeof task.check === 'function') {
+          task.checkName = 'custom'
+          task.isPass = task.check({res: task.res, errorRes: task.errorRes, group});
+        } else {
+          throw new Error('there is not check fn.');
+        }
         // after
         if (task.hasOwnProperty('afterActionForInstance')) {
           task.afterActionForInstance({instance: group.instance, res: task.res, errorRes: task.errorRes})
@@ -67,22 +90,22 @@ export default function App() {
             <div key={index}>
               <div style={{fontSize: '20px', fontWeight: 'bold'}}>{index}. {group.title}</div>
               <div>
-                <div style={{display: 'flex'}}>
+                <div style={{display: 'flex', flexWrap: 'wrap', border: '1px dotted gray', padding: '8px'}}>
                   {
                     group.taskList.map((task, index2) => {
                       return (
-                        <div style={{display: 'flex'}}>
+                        <div key={index2} style={{display: 'flex'}}>
                           <div style={{maxWidth: '200px'}}>
-                            <div><Button variant="success">{task.title}</Button></div>
+                            <div><Button variant={getVariant(task)}>{task.title}</Button></div>
                             <div>
                               {
                                 task.isPass
-                                ? <div style={{color: 'blue'}}>Passed</div>
-                                : <div style={{color: 'red'}}>Failed</div>
+                                ? <div style={{color: 'blue'}}>({task.checkName}) Passed</div>
+                                : <div style={{color: 'red'}}>({task.checkName}) Failed</div>
                               }
                             </div>
                           </div>
-                          <div style={{width: '40px', textAlign: 'center'}}>-></div>
+                          <div style={{width: '40px', textAlign: 'center'}}> > </div>
                         </div>
                       )
                     })
@@ -90,7 +113,8 @@ export default function App() {
                 </div>
                 <div>
                   {
-                    group.taskList.map((task, index2) => {
+                    // TODO
+                    false && group.taskList.map((task, index2) => {
                       return (
                         <div key={index2} style={{padding: '4px', display: 'flex'}}>
                           <div style={{fontSize: '16px', minWidth: '200px'}}>{index2}. {task.title}</div>

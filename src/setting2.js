@@ -34,16 +34,16 @@ const COMMON_TASK = [/*{
       return {beforeTask};
     },
     action: ({params}) => {
-      return {data: 'B1' + params.beforeTask.res};
+      return {data: 'B1' + params.beforetask?.res};
     },
-    check: ({res, errorRes}) => res.data === 'A1'
+    check: ({res, errorRes}) => res?.data === 'A1'
   }, {
     id: 'C',
     title: 'C',
     action: ({params}) => {
       return {data: 'C1'};
     },
-    check: CHECK.STATUS200
+    check: CHECK.S200
   },  */{
     id: 'loginUser4',
     title: '사용자(user4) 로그인',
@@ -101,16 +101,16 @@ export const TASK_GROUP_DEFAULT = [/* {
     title: '사용자(user1) 로그인 실패(잘못된 패스워드)',
     paramsFn: ({beforeTask}) => ({username: 'user1', password: 'xxxx'}),
     action: api.login,
-    check: CHECK.STATUS401
+    check: CHECK.S401
   }, {
     title: '사용자(user1) 로그인 실패(잘못된 username)',
     paramsFn: ({beforeTask}) => ({username: 'user11111', password: '1111'}),
     action: api.login,
-    check: CHECK.STATUS401
+    check: CHECK.S401
   }, {
     title: '사용자(user1) 로그인 실패(파라메터 없음)',
     action: api.login,
-    check: CHECK.STATUS401
+    check: CHECK.S401
   }],
 }, {
   title: '로그인',
@@ -126,7 +126,7 @@ export const TASK_GROUP_DEFAULT = [/* {
     {
       title: '스토어 조회',
       action: api.listStore,
-      check: CHECK.STATUS403
+      check: CHECK.S403
     }
   ],
 }, {
@@ -140,26 +140,26 @@ export const TASK_GROUP_DEFAULT = [/* {
       title: '스토어 등록 실패(동일한 이름)',
       paramsFn: ({beforeTask}) => ({name: storeName, status: 'OPEN'}),
       action: api.postStore,
-      check: CHECK.STATUS400
+      check: CHECK.S400
     }, {
       title: '스토어 등록 실패(파라메터 없음)',
       action: api.postStore,
-      check: CHECK.STATUS400
+      check: CHECK.S400
     }, {
       title: '스토어 등록 실패(이름이 없음)',
       paramsFn: ({beforeTask}) => ({status: 'OPEN'}),
       action: api.postStore,
-      check: CHECK.STATUS400
+      check: CHECK.S400
     }, {
       title: '스토어 등록 실패(상태가 없음)',
       paramsFn: ({beforeTask}) => ({name: 'A'}),
       action: api.postStore,
-      check: CHECK.STATUS400
+      check: CHECK.S400
     }, {
       title: '스토어 등록 실패(잘못된 상태값)',
       paramsFn: ({beforeTask}) => ({status: 'A'}),
       action: api.postStore,
-      check: CHECK.STATUS400
+      check: CHECK.S400
     }
   ],
 }, {
@@ -178,8 +178,8 @@ export const TASK_GROUP_DEFAULT = [/* {
       paramsFn: ({beforeTask}) => ({}),
       action: api.listStore,
       check: ({res, errorRes, group}) => {
-        const task = find(group.taskList, {id: 'listStore1'});
-        return res.data.total === task?.res?.data?.total + 1;
+        const task = group.findTask('listStore1');
+        return res?.data.total === task?.res?.data?.total + 1;
       }
     }
   ],
@@ -195,7 +195,7 @@ export const TASK_GROUP_DEFAULT = [/* {
       id: 'postProduct',
       title: '상품 등록',
       paramsFn: ({beforeTask, group}) => {
-        const task = find(group.taskList, {id: 'postStore'});
+        const task = group.findTask('postStore');
         return {
           background: "linear-gradient(181deg, #9661bd, #494b9b)",
           categoryId: "1",
@@ -211,14 +211,14 @@ export const TASK_GROUP_DEFAULT = [/* {
             quantity: "22"
           }],
           status: "OPEN",
-          storeId: task.res.data
+          storeId: task?.res?.data
         }
       },
       action: api.postProduct
     }, {
       title: '상품 등록 실패(이름 중복)',
       paramsFn: ({beforeTask, group}) => {
-        const task = find(group.taskList, {id: 'postStore'});
+        const task = group.findTask('postStore');
         return {
           background: "linear-gradient(181deg, #9661bd, #494b9b)",
           categoryId: "1",
@@ -230,30 +230,30 @@ export const TASK_GROUP_DEFAULT = [/* {
             quantity: "22"
           }],
           status: "OPEN",
-          storeId: task.res.data
+          storeId: task?.res?.data
         }
       },
       action: api.postProduct,
-      check: CHECK.STATUS400
+      check: CHECK.S400
     }, {
       title: '상품 등록 실패(옵션없음)',
       paramsFn: ({beforeTask, group}) => {
-        const task = find(group.taskList, {id: 'postStore'});
+        const task = group.findTask('postStore');
         return {
           background: "linear-gradient(181deg, #9661bd, #494b9b)",
           categoryId: "1",
           description: "1",
           name: "name+" + Date.now(),
           status: "OPEN",
-          storeId: task.res.data
+          storeId: task?.res?.data
         }
       },
       action: api.postProduct,
-      check: CHECK.STATUS400
+      check: CHECK.S400
     }, {
       title: '상품 등록 실패(옵션없음)',
       paramsFn: ({beforeTask, group}) => {
-        const task = find(group.taskList, {id: 'postStore'});
+        const task = group.findTask('postStore');
         return {
           background: "linear-gradient(181deg, #9661bd, #494b9b)",
           categoryId: "1",
@@ -261,15 +261,15 @@ export const TASK_GROUP_DEFAULT = [/* {
           name: "name+" + Date.now(),
           options: [],
           status: "OPEN",
-          storeId: task.res.data
+          storeId: task?.res?.data
         }
       },
       action: api.postProduct,
-      check: CHECK.STATUS400
+      check: CHECK.S400
     }, {
       title: '상품 등록 실패(옵션 가격 0원)',
       paramsFn: ({beforeTask, group}) => {
-        const task = find(group.taskList, {id: 'postStore'});
+        const task = group.findTask('postStore');
         return {
           background: "linear-gradient(181deg, #9661bd, #494b9b)",
           categoryId: "1",
@@ -281,11 +281,11 @@ export const TASK_GROUP_DEFAULT = [/* {
             quantity: "22"
           }],
           status: "OPEN",
-          storeId: task.res.data
+          storeId: task?.res?.data
         }
       },
       action: api.postProduct,
-      check: CHECK.STATUS400
+      check: CHECK.S400
     }
   ],
 }, {
@@ -300,7 +300,7 @@ export const TASK_GROUP_DEFAULT = [/* {
       id: 'postProduct',
       title: '상품 등록',
       paramsFn: ({beforeTask, group}) => {
-        const task = find(group.taskList, {id: 'postStore'});
+        const task = group.findTask('postStore');
         return {
           background: "linear-gradient(181deg, #9661bd, #494b9b)",
           categoryId: "1",
@@ -316,7 +316,7 @@ export const TASK_GROUP_DEFAULT = [/* {
             quantity: "22"
           }],
           status: "OPEN",
-          storeId: task.res.data
+          storeId: task?.res?.data
         }
       },
       action: api.postProduct
@@ -324,42 +324,42 @@ export const TASK_GROUP_DEFAULT = [/* {
       id: 'detailProduct',
       title: '상품 상세 조회',
       paramsFn: ({beforeTask, group}) => {
-        const task = find(group.taskList, {id: 'postProduct'});
+        const task = group.findTask('postProduct');
         return {
-          id: task.res.data
+          id: task?.res?.data
         }
       },
       action: api.detailProduct
     }, {
       title: '상품 수정',
       paramsFn: ({beforeTask, group}) => {
-        const task = find(group.taskList, {id: 'detailProduct'});
+        const task = group.findTask('detailProduct');
         return {
-          ...task.res.data
+          ...task?.res?.data
         }
       },
       action: api.putProduct
     }, {
-      title: '상품 수정 실패(옵션 개수 안맞음)',
+      title: '상품 수정 실패(옵션 삭제)',
       paramsFn: ({beforeTask, group}) => {
-        const task = find(group.taskList, {id: 'detailProduct'});
+        const task = group.findTask('detailProduct');
         return {
-          ...task.res.data,
+          ...task?.res?.data,
           options: [
-            task.res.data.options[0]
+            task?.res?.data.options[0]
           ]
         }
       },
       action: api.putProduct,
-      check: CHECK.STATUS400
+      check: CHECK.S400
     }, {
       title: '상품 수정 (옵션 1개 추가)',
       paramsFn: ({beforeTask, group}) => {
-        const task = find(group.taskList, {id: 'detailProduct'});
+        const task = group.findTask('detailProduct');
         return {
-          ...task.res.data,
+          ...task?.res?.data,
           options: [
-            ...task.res.data.options,
+            ...task?.res?.data.options,
             {
               name: "신규옵션",
               price: "1",
@@ -372,17 +372,210 @@ export const TASK_GROUP_DEFAULT = [/* {
     }, {
       title: '상품 상세 조회(옵션개수 1개 추가된 것 확인)',
       paramsFn: ({beforeTask, group}) => {
-        const task = find(group.taskList, {id: 'postProduct'});
+        const task = group.findTask('postProduct');
         return {
-          id: task.res.data
+          id: task?.res?.data
         }
       },
       action: api.detailProduct,
       check: ({res, errorRes, group}) => {
-        const task = find(group.taskList, {id: 'detailProduct'});
-        return task.res.data.options.length + 1 === res.data.options.length;
+        const task = group.findTask('detailProduct');
+        return task?.res?.data.options.length + 1 === res?.data.options.length;
       },
     }]
+  }, {
+    title: '장바구니 추가',
+    taskList: ['loginSellerSuccess',
+      {
+        id: 'postStore',
+        title: '스토어 등록',
+        paramsFn: ({beforeTask}) => ({name: '스토어-' + Date.now(), status: 'OPEN'}),
+        action: api.postStore    
+      }, {
+        id: 'postProduct1',
+        title: '상품1 등록',
+        paramsFn: ({beforeTask, group}) => {
+          const task = group.findTask('postStore');
+          return {
+            background: "linear-gradient(181deg, #9661bd, #494b9b)",
+            categoryId: "1",
+            description: "1",
+            name: '상품' + Date.now(),
+            options: [{
+              name: "노랑",
+              price: "33",
+              quantity: "22"
+            }, {
+              name: "검정",
+              price: "33",
+              quantity: "22"
+            }],
+            status: "OPEN",
+            storeId: task?.res?.data
+          }
+        },
+        action: api.postProduct
+      }, {
+        id: 'postProduct2',
+        title: '상품2 등록',
+        paramsFn: ({beforeTask, group}) => {
+          const task = group.findTask('postStore');
+          return {
+            background: "linear-gradient(181deg, #9661bd, #494b9b)",
+            categoryId: "1",
+            description: "1",
+            name: '상품' + Date.now(),
+            options: [{
+              name: "노랑",
+              price: "33",
+              quantity: "22"
+            }, {
+              name: "검정",
+              price: "33",
+              quantity: "22"
+            }],
+            status: "OPEN",
+            storeId: task?.res?.data
+          }
+        },
+        action: api.postProduct
+      },
+      'loginUser1',
+      {
+        id: 'detailProductUser',
+        title: '상품1 상세 조회(사용자)',
+        paramsFn: ({beforeTask, group}) => {
+          const task = group.findTask('postProduct1');
+          return {
+           id: task?.res?.data,
+          }
+        },
+        action: api.detailProductUser
+      }, {
+        title: '장바구니 추가 - 상품1',
+        paramsFn: ({beforeTask, group}) => {
+          const task = group.findTask('detailProductUser');
+          return {
+           productId: task?.res?.data?.id,
+           cartOptions: [{
+            id: task?.res?.data?.options[0]?.id,
+            count: task?.res?.data?.options[0]?.quantity, // 전체 수량
+            price: task?.res?.data?.options[0]?.price,
+           }]
+          }
+        },
+        action: api.postCart
+      }, {
+        title: '장바구니 추가 실패 (재고 초과) - 상품1',
+        paramsFn: ({beforeTask, group}) => {
+          const task = group.findTask('detailProductUser');
+          return {
+           productId: task?.res?.data?.id,
+           cartOptions: [{
+            id: task?.res?.data?.options[0]?.id,
+            count: task?.res?.data?.options[0]?.quantity + 1,
+            price: task?.res?.data?.options[0]?.price,
+           }]
+          }
+        },
+        action: api.postCart,
+        check: CHECK.S400
+      }, {
+        id: 'detailProductUser2',
+        title: '상품2 상세 조회(사용자)',
+        paramsFn: ({beforeTask, group}) => {
+          const task = group.findTask('postProduct2');
+          return {
+           id: task?.res?.data,
+          }
+        },
+        action: api.detailProductUser
+      },
+      'loginSellerSuccess',
+      {
+        id: 'detailProduct1',
+        title: '상품1 상세 조회',
+        paramsFn: ({beforeTask, group}) => {
+          const task = group.findTask('postProduct1');
+          return {
+            id: task?.res?.data
+          }
+        },
+        action: api.detailProduct,
+      }, {
+        title: '상품1 수정 - 상태(CLOSE)',
+        paramsFn: ({beforeTask, group}) => {
+          const task = group.findTask('detailProduct1');
+          return { 
+            ...task?.res?.data,
+            status: 'CLOSE'
+          }
+        },
+        action: api.putProduct
+      }, {
+        id: 'detailProduct2',
+        title: '상품2 상세 조회',
+        paramsFn: ({beforeTask, group}) => {
+          const task = group.findTask('postProduct2');
+          return {
+            id: task?.res?.data
+          }
+        },
+        action: api.detailProduct,
+      }, {
+        title: '상품2 수정 - 옵션가격 수정',
+        paramsFn: ({beforeTask, group}) => {
+          const task = group.findTask('detailProduct2');
+          const options = task?.res?.data?.options;
+          options[0].price = options[0].price - 1;
+          return { 
+            ...task?.res?.data,
+            options
+          }
+        },
+        action: api.putProduct
+      }, {
+        id: 'detailProductUser1',
+        title: '상품1 상세 조회(사용자)',
+        paramsFn: ({beforeTask, group}) => {
+          const task = group.findTask('postProduct1');
+          return {
+           id: task?.res?.data,
+          }
+        },
+        action: api.detailProductUser
+      }, {
+        title: '장바구니 추가 실패(상품 상태 CLOSE) - 상품1',
+        paramsFn: ({beforeTask, group}) => {
+          const task = group.findTask('detailProductUser1');
+          return {
+           productId: task?.res?.data?.id,
+           cartOptions: [{
+            id: task?.res?.data?.options[0]?.id,
+            count: task?.res?.data?.options[0]?.quantity,
+            price: task?.res?.data?.options[0]?.price,
+           }]
+          }
+        },
+        action: api.postCart,
+        check: CHECK.S400
+      }, {
+        title: '장바구니 추가 실패(옵션 가격 변경됨) - 상품2',
+        paramsFn: ({beforeTask, group}) => {
+          const task = group.findTask('detailProductUser2');
+          return {
+           productId: task?.res?.data?.id,
+           cartOptions: [{
+            id: task?.res?.data?.options[0]?.id,
+            count: task?.res?.data?.options[0]?.quantity,
+            price: task?.res?.data?.options[0]?.price,
+           }]
+          }
+        },
+        action: api.postCart,
+        check: CHECK.S400
+      }
+    ]
   }
 ];
 

@@ -15,7 +15,7 @@ export const cloneTask = (obj) => {
 }
 export const setBasicFnToTask = (task) => {
   if (!task.hasOwnProperty('check')) {
-    task.check = CHECK.STATUS200;
+    task.check = CHECK.S200;
   }
 }
 
