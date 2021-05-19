@@ -22,7 +22,7 @@ const displayData = (d) => {
 
 const run = async () => {
   for (let i = 0; i < TASK_GROUP.length; i++) {
-    // if (i !== 1) continue; // 예외처리
+    // if (i !== 5) continue; // 예외처리
     const group = TASK_GROUP[i];
     for (let j = 0; j < group.taskList.length; j++) {
       const task = group.taskList[j];
@@ -30,7 +30,7 @@ const run = async () => {
       let params;
       if (task.hasOwnProperty('paramsFn')) {
         let beforeTask = j-1 >= 0 ? group.taskList[j-1] : undefined;
-        params = task.paramsFn({beforeTask});
+        params = task.paramsFn({beforeTask, group});
       }
       task.params = params;
       try {

@@ -4,6 +4,7 @@ import { cloneTask, setBasicFnToTask, setBasicFnToGroup } from '@/util/taskUtil'
 import { find } from 'lodash-es';
 
 const storeName = '스토어-' + Date.now();
+const productName = '상품-' + Date.now();
 
 /**
  * 공통 테스크
@@ -185,6 +186,139 @@ export const TASK_GROUP_DEFAULT = [/* {
 }, {
   title: '상품 등록',
   taskList: ['loginSellerSuccess',
+    {
+      id: 'postStore',
+      title: '스토어 등록',
+      paramsFn: ({beforeTask}) => ({name: '스토어-' + Date.now(), status: 'OPEN'}),
+      action: api.postStore    
+    }, {
+      id: 'postProduct',
+      title: '상품 등록',
+      paramsFn: ({beforeTask, group}) => {
+        const task = find(group.taskList, {id: 'postStore'});
+        return {
+          background: "linear-gradient(181deg, #9661bd, #494b9b)",
+          categoryId: "1",
+          description: "1",
+          name: productName,
+          options: [{
+            name: "노랑",
+            price: "33",
+            quantity: "22"
+          }, {
+            name: "검정",
+            price: "33",
+            quantity: "22"
+          }],
+          status: "OPEN",
+          storeId: task.res.data
+        }
+      },
+      action: api.postProduct
+    }, {
+      title: '상품 등록 실패(이름 중복)',
+      paramsFn: ({beforeTask, group}) => {
+        const task = find(group.taskList, {id: 'postStore'});
+        return {
+          background: "linear-gradient(181deg, #9661bd, #494b9b)",
+          categoryId: "1",
+          description: "1",
+          name: productName,
+          options: [{
+            name: "11",
+            price: "33",
+            quantity: "22"
+          }],
+          status: "OPEN",
+          storeId: task.res.data
+        }
+      },
+      action: api.postProduct,
+      check: CHECK.STATUS400
+    }, {
+      title: '상품 등록 실패(옵션없음)',
+      paramsFn: ({beforeTask, group}) => {
+        const task = find(group.taskList, {id: 'postStore'});
+        return {
+          background: "linear-gradient(181deg, #9661bd, #494b9b)",
+          categoryId: "1",
+          description: "1",
+          name: "name+" + Date.now(),
+          status: "OPEN",
+          storeId: task.res.data
+        }
+      },
+      action: api.postProduct,
+      check: CHECK.STATUS400
+    }, {
+      title: '상품 등록 실패(옵션없음)',
+      paramsFn: ({beforeTask, group}) => {
+        const task = find(group.taskList, {id: 'postStore'});
+        return {
+          background: "linear-gradient(181deg, #9661bd, #494b9b)",
+          categoryId: "1",
+          description: "1",
+          name: "name+" + Date.now(),
+          options: [],
+          status: "OPEN",
+          storeId: task.res.data
+        }
+      },
+      action: api.postProduct,
+      check: CHECK.STATUS400
+    }, {
+      title: '상품 등록 실패(옵션 가격 0원)',
+      paramsFn: ({beforeTask, group}) => {
+        const task = find(group.taskList, {id: 'postStore'});
+        return {
+          background: "linear-gradient(181deg, #9661bd, #494b9b)",
+          categoryId: "1",
+          description: "1",
+          name: "name+" + Date.now(),
+          options: [{
+            name: "11",
+            price: "0",
+            quantity: "22"
+          }],
+          status: "OPEN",
+          storeId: task.res.data
+        }
+      },
+      action: api.postProduct,
+      check: CHECK.STATUS400
+    }, {
+      id: 'detailProduct',
+      title: '상품 상세 조회',
+      paramsFn: ({beforeTask, group}) => {
+        const task = find(group.taskList, {id: 'postProduct'});
+        return {
+          id: task.res.data
+        }
+      },
+      action: api.detailProduct
+    }, {
+      title: '상품 수정',
+      paramsFn: ({beforeTask, group}) => {
+        const task = find(group.taskList, {id: 'detailProduct'});
+        return {
+          ...task.res.data
+        }
+      },
+      action: api.putProduct
+    }, {
+      title: '상품 수정 실패(옵션 개수 안맞음)',
+      paramsFn: ({beforeTask, group}) => {
+        const task = find(group.taskList, {id: 'detailProduct'});
+        return {
+          ...task.res.data,
+          options: [
+            task.res.data.options[0]
+          ]
+        }
+      },
+      action: api.putProduct,
+      check: CHECK.STATUS400
+    }
   ],
 }];
 
