@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import {TASK_GROUP} from './setting2.js';
-import { Container, Button, Form } from 'react-bootstrap';
+import { Container, Button, Badge } from 'react-bootstrap';
 import { ArrowRight } from 'react-bootstrap-icons';
 
 const displayData = (d) => {
@@ -22,7 +22,7 @@ const displayData = (d) => {
 
 const run = async () => {
   for (let i = 0; i < TASK_GROUP.length; i++) {
-    // if (i !== 5) continue; // 예외처리
+    // if (i !== 11111) continue; // 예외처리
     const group = TASK_GROUP[i];
     for (let j = 0; j < group.taskList.length; j++) {
       const task = group.taskList[j];
@@ -67,26 +67,13 @@ export default function App() {
             <div key={index}>
               <div style={{fontSize: '20px', fontWeight: 'bold'}}>{index}. {group.title}</div>
               <div>
-                {
-                  group.taskList.map((task, index2) => {
-                    return (
-                      <div key={index2} style={{padding: '4px', display: 'flex'}}>
-                        <div style={{fontSize: '16px', minWidth: '200px'}}>{index2}. {task.title}</div>
-                        <div style={{marginLeft: '10px'}}>
-                          <div style={{display: 'flex'}}>
-                            <div style={{minWidth: '130px'}}>params</div>
-                            <div title={JSON.stringify(task.params)}>{displayData(task.params)}</div>
-                          </div>
-                          <div style={{display: 'flex'}}>
-                            <div style={{minWidth: '130px'}}>res</div>
-                            <div title={JSON.stringify(task?.res)}>{displayData(task?.res?.data)}</div>
-                          </div>
-                          <div style={{display: 'flex'}}>
-                            <div style={{minWidth: '130px'}}>errorRes</div>
-                            <div title={JSON.stringify(task.errorRes)}>{displayData(task.errorRes) || '-'}</div>
-                          </div>
-                          <div style={{display: 'flex'}}>
-                            <div style={{minWidth: '130px'}}>isPass</div>
+                <div style={{display: 'flex'}}>
+                  {
+                    group.taskList.map((task, index2) => {
+                      return (
+                        <div style={{display: 'flex'}}>
+                          <div style={{maxWidth: '200px'}}>
+                            <div><Button variant="success">{task.title}</Button></div>
                             <div>
                               {
                                 task.isPass
@@ -95,11 +82,47 @@ export default function App() {
                               }
                             </div>
                           </div>
+                          <div style={{width: '40px', textAlign: 'center'}}>-></div>
                         </div>
-                      </div>
-                    )
-                  })
-                }
+                      )
+                    })
+                  }
+                </div>
+                <div>
+                  {
+                    group.taskList.map((task, index2) => {
+                      return (
+                        <div key={index2} style={{padding: '4px', display: 'flex'}}>
+                          <div style={{fontSize: '16px', minWidth: '200px'}}>{index2}. {task.title}</div>
+                          <div style={{marginLeft: '10px'}}>
+                            <div style={{display: 'flex'}}>
+                              <div style={{minWidth: '130px'}}>params</div>
+                              <div title={JSON.stringify(task.params)}>{displayData(task.params)}</div>
+                            </div>
+                            <div style={{display: 'flex'}}>
+                              <div style={{minWidth: '130px'}}>res</div>
+                              <div title={JSON.stringify(task?.res)}>{displayData(task?.res?.data)}</div>
+                            </div>
+                            <div style={{display: 'flex'}}>
+                              <div style={{minWidth: '130px'}}>errorRes</div>
+                              <div title={JSON.stringify(task.errorRes)}>{displayData(task.errorRes) || '-'}</div>
+                            </div>
+                            <div style={{display: 'flex'}}>
+                              <div style={{minWidth: '130px'}}>isPass</div>
+                              <div>
+                                {
+                                  task.isPass
+                                  ? <div style={{color: 'blue'}}>Passed</div>
+                                  : <div style={{color: 'red'}}>Failed</div>
+                                }
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    })
+                  }
+                </div>
               </div>
             </div>
           )
