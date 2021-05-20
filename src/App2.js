@@ -114,7 +114,7 @@ export default function App() {
                 <div>
                   {
                     // TODO
-                    false && group.taskList.map((task, index2) => {
+                    true && group.taskList.map((task, index2) => {
                       return (
                         <div key={index2} style={{padding: '4px', display: 'flex'}}>
                           <div style={{fontSize: '16px', minWidth: '200px'}}>{index2}. {task.title}</div>
