@@ -90,7 +90,7 @@ export default function App() {
             <div key={index}>
               <div style={{fontSize: '20px', fontWeight: 'bold'}}>{index}. {group.title}</div>
               <div>
-                <div style={{display: 'flex', flexWrap: 'wrap', border: '1px dotted gray', padding: '8px'}}>
+                <div style={{width: '100%', display: 'flex', border: '1px dotted gray', padding: '8px'}}>
                   {
                     group.taskList.map((task, index2) => {
                       return (
