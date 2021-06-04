@@ -17,6 +17,9 @@ export const setBasicFnToTask = (task) => {
   if (!task.hasOwnProperty('check')) {
     task.check = CHECK.S200;
   }
+  if (!task.hasOwnProperty('row')) {
+    task.row = 0;
+  }
 }
 
 export const setBasicFnToGroup = (group) => {

@@ -8,3 +8,35 @@ html, body {
 pre {
   margin-bottom: 0;
 }
+
+.modal {
+  .modal-dialog {
+    &.modal-50w {
+      max-width: 50%;
+      min-width: 600px;
+    }
+    &.modal-60w {
+      max-width: 60%;
+      min-width: 700px;
+    }
+    &.modal-90w {
+      max-width: 90%;
+    }
+  }
+}
+
+pre {
+  // max-height: 300px;
+  // width: 50%;
+}
+
+svg {
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  // left:24px;  /* Use this if the outer box is a circle */
+/*    left:0;     /* Use this if the outer box is a square */
+  // width: 100%;
+  z-index: -1;
+}

@@ -112,7 +112,7 @@ export default function App() {
                   }
                 </div>
                 <div>
-                  {
+                  {/* {
                     // TODO
                     true && group.taskList.map((task, index2) => {
                       return (
@@ -145,7 +145,7 @@ export default function App() {
                         </div>
                       )
                     })
-                  }
+                  } */}
                 </div>
               </div>
             </div>
