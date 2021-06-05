@@ -156,7 +156,8 @@ postStore,
       check: ({res, errorRes, currentTask}) => {
         const task = currentTask.findTask('listStore1');
         return res?.data.total === task?.res?.data?.total + 1;
-      }
+      },
+      row: 1
     }
   ],
 }, 

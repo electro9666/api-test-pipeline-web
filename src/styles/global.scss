@@ -37,6 +37,7 @@ svg {
   bottom:0;
   // left:24px;  /* Use this if the outer box is a circle */
 /*    left:0;     /* Use this if the outer box is a square */
-  // width: 100%;
-  z-index: -1;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
 }

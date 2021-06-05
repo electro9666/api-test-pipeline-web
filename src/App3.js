@@ -94,6 +94,7 @@ const run = async () => {
 }
 export default function App() {
   const [data, setData] = useState(null);
+  const [svgData, setSvgData] = useState(null);
 
   // modal
   const [show, setShow] = useState(false);
@@ -106,6 +107,40 @@ export default function App() {
   useEffect(() => {
     start();
   }, []);
+
+  useEffect(() => {
+    if (!data) return;
+    
+    const svgTemp = [];
+    data.forEach((group, index) => {
+      const svgGroup = [];
+      const $groupBox = document.querySelector(`#group-${index}`);
+      const groupBoxPos = $groupBox.getBoundingClientRect();
+      group.taskList.forEach((task, index2) => {
+        if (task.refTaskId) {
+          const $end = document.querySelector(`#group-${index}-task-${index2} .task-circle`);
+          const endPos = $end.getBoundingClientRect();
+          if (task.refTaskId) {
+            task.refTaskId.forEach((id) => {
+              const $start = document.querySelector(`.group-${index}-task-${id} .task-circle`);
+              console.log(`#group-${index}-task-${id} .task-circle`, '$start', $start);
+              const startPos = $start.getBoundingClientRect();
+              console.log('startPos', startPos, endPos)
+              svgGroup.push({
+                x0: startPos.x + startPos.width,
+                y0: startPos.y - groupBoxPos.y + 70,
+                x1: endPos.x,
+                y1: endPos.y - groupBoxPos.y + 20
+              })
+            });
+          }
+        }
+      });
+      svgTemp.push(svgGroup);
+    });
+    setSvgData(svgTemp)
+    console.log('svgTemp', svgTemp);
+  }, [data]);
 
   if (!data) return <></>;
   return (
@@ -121,19 +156,25 @@ export default function App() {
               <hr/>
               <div style={{fontSize: '20px', fontWeight: 'bold'}}>{index}. {group.title}</div>
               <div>
-                <div style={{width: '100%', display: 'flex', padding: '8px', position: 'relative'}}>
-                  {/* <svg>
-                    <path d="M2,4 C200,100 400,100 597,1" />
-                  </svg> */}
+                <div id={`group-${index}`} style={{width: '100%', display: 'flex', padding: '8px', position: 'relative'}}>
+                  <svg>
+                    {/* <path d="M 10 75 Q 50 10 100 75 T 190 75" stroke="black" stroke-linecap="round" stroke-dasharray="5,10,5" fill="none"/> */}
+                    {/* <path d="M 10 10, 50 50" stroke="green" strokeWidth="3" strokeLinecap="round" strokeDasharray="5,10,5" fill="green" /> */}
+                    {
+                      svgData && svgData[index] && svgData[index].map((svgObj, svgi) => {
+                        return <path key={svgi} d={`M ${svgObj.x0} ${svgObj.y0} C ${svgObj.x0 + 50} ${svgObj.y0 + 20} ${svgObj.x1 - 50} ${svgObj.y1 - 20} ${svgObj.x1} ${svgObj.y1}`} stroke="currentColor" fill="none" strokeDasharray="none" strokeWidth="1" style={{color: 'green'}} />
+                      })
+                    }
+                  </svg>
                   {
                     group.taskList.map((task, index2) => {
                       return (
-                        <div key={index2} style={{display: 'flex'}}>
-                          <div style={{width: '200px', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: task.row === 1 ? '80px': ''}}>
+                        <div key={index2} style={{display: 'flex', zIndex: '2'}}>
+                          <div id={`group-${index}-task-${index2}`} className={`group-${index}-task-${task.id}`} style={{width: '200px', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: task.row === 1 ? '80px': ''}}>
                             {
                               task.refTaskId ? 'ref: ' + task.refTaskId : ''
                             }
-                            <div style={{border: `1px dashed ${task.isPass ? 'blue' : 'red'}`, padding: '10px', borderRadius: '25px', width: '80px', height: '80px', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer'}}
+                            <div className="task-circle" style={{border: `1px dashed ${task.isPass ? 'blue' : 'red'}`, padding: '10px', borderRadius: '25px', width: '80px', height: '80px', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer', background: 'white', zIndex: 2}}
                               onClick={() => {
                                 setModalData(task);
                                 setShow(true);
