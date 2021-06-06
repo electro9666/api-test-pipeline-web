@@ -7,35 +7,6 @@ import { CHECK, CHECK_FN } from '@/group3/check';
 import { user } from '@/group3/auth';
 import SvgContainer from '@/group3/SvgContainer';
 
-const getTaskTitle = (task) => {
-  return task.checkName;
-}
-const getVariant = (task) => {
-  if (task.checkName === 'S200') {
-    return 'success';
-  } else if (task.checkName === 'custom') {
-    return 'secondary';
-  } else {
-    return 'warning';
-  }
-}
-const displayData = (d) => {
-  if (typeof d === 'undefined') {
-    return;
-  }
-  let result = typeof d === 'object'
-  ? `[${typeof d}] ` + JSON.stringify(d, null, 2)
-  : `[${typeof d}] ` + d;
-  const min = 400;
-  const max = 800;
-  if (min < result.length && result.length < max) {
-    return result.substring(0, min) + ` ...more(${result.length - min})`;
-  } else if (max <= result.length) {
-    return result.substring(0, min) + ` ...more(${result.length - max})... ` + result.substring(result.length - min);
-  }
-  return result;
-}
-
 const run = async () => {
   for (let i = 0; i < TASK_GROUP.length; i++) {
     // if (i !== 11111) continue; // 예외처리
@@ -96,6 +67,8 @@ const run = async () => {
 export default function App() {
   const [data, setData] = useState(null);
   const [svgData, setSvgData] = useState(null);
+  const [mouseData, setMouseData] = useState({});
+
 
   // modal
   const [show, setShow] = useState(false);
@@ -118,16 +91,17 @@ export default function App() {
       const $groupBox = document.querySelector(`#group-${index}`);
       const groupBoxPos = $groupBox.getBoundingClientRect();
       group.taskList.forEach((task, index2) => {
+        const svgTask = [];
         if (task.refTaskId) {
           const $end = document.querySelector(`#group-${index}-task-${index2} .task-circle`);
           const endPos = $end.getBoundingClientRect();
           if (task.refTaskId) {
             task.refTaskId.forEach((id) => {
               const $start = document.querySelector(`.group-${index}-task-${id} .task-circle`);
-              console.log(`#group-${index}-task-${id} .task-circle`, '$start', $start);
+              // console.log(`#group-${index}-task-${id} .task-circle`, '$start', $start);
               const startPos = $start.getBoundingClientRect();
-              console.log('startPos', startPos, endPos)
-              svgGroup.push({
+              // console.log('startPos', startPos, endPos)
+              svgTask.push({
                 x0: startPos.x + startPos.width,
                 y0: startPos.y - groupBoxPos.y + 70,
                 x1: endPos.x,
@@ -136,6 +110,7 @@ export default function App() {
             });
           }
         }
+        svgGroup.push(svgTask);
       });
       svgTemp.push(svgGroup);
     });
@@ -151,19 +126,28 @@ export default function App() {
         <span> / 실패: {data.map((group) => group.taskList.filter((task) => !task.isPass).length).reduce((acc, val) => acc + val)}</span>
       </div>
       {
-        data.map((group, index) => {
+        data.map((group, groupIndex) => {
           return (
-            <div key={index}>
+            <div key={groupIndex}>
               <hr/>
-              <div style={{fontSize: '20px', fontWeight: 'bold'}}>{index}. {group.title}</div>
+              <div style={{fontSize: '20px', fontWeight: 'bold'}}>{groupIndex}. {group.title}</div>
               <div>
-                <div id={`group-${index}`} style={{width: '100%', display: 'flex', padding: '8px', position: 'relative'}}>
-                  <SvgContainer svgData={svgData} index={index}/>
+                <div id={`group-${groupIndex}`} style={{width: '100%', display: 'flex', padding: '8px', position: 'relative'}}>
+                  <SvgContainer svgData={svgData} groupIndex={groupIndex} mouseData={mouseData} />
                   {
-                    group.taskList.map((task, index2) => {
+                    group.taskList.map((task, taskIndex) => {
                       return (
-                        <div key={index2} style={{display: 'flex', zIndex: '2'}}>
-                          <div id={`group-${index}-task-${index2}`} className={`group-${index}-task-${task.id}`} style={{width: '200px', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: task.row === 1 ? '80px': ''}}>
+                        <div key={taskIndex} style={{display: 'flex', zIndex: '2'}}>
+                          <div id={`group-${groupIndex}-task-${taskIndex}`} className={`group-${groupIndex}-task-${task.id}`} style={{width: '200px', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: task.row === 1 ? '80px': ''}}
+                            onMouseEnter={() => {
+                              setMouseData({
+                                groupIndex, taskIndex
+                              });
+                            }}
+                            onMouseLeave={() => {
+                              setMouseData({});
+                            }}
+                          >
                             {
                               task.refTaskId ? 'ref: ' + task.refTaskId : ''
                             }
@@ -173,7 +157,7 @@ export default function App() {
                                 setShow(true);
                               }}
                             >
-                              <div>{getTaskTitle(task)}</div>
+                              <div>{task.checkName}</div>
                             </div>
                             <div><span style={{background: 'pink'}}>{task.login?.name}</span> <span style={{color: 'gray'}}>{task.title}</span></div>
                             {
@@ -191,72 +175,84 @@ export default function App() {
           )
         })
       }
-      <Modal show={show} onHide={() => setShow(false)} dialogClassName="modal-90w">
-        <Modal.Header closeButton>
-          <Modal.Title>{modalData?.title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <table className="table">
-            <thead>
-              <tr>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>title</td>
-                <td>{modalData?.title}</td>
-              </tr>
-              <tr>
-                <td>pre login</td>
-                <td><pre>{JSON.stringify(modalData?.login?.name, null, 2)}</pre></td>
-              </tr>
-              <tr>
-                <td>checkName/isPass</td>
-                <td>
-                  <span>{modalData?.checkName}</span> / 
+      {
+        modalData && (
+          <Modal show={show} onHide={() => setShow(false)} dialogClassName="modal-90w">
+            <Modal.Header closeButton>
+              <Modal.Title>{modalData.title}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>title</td>
+                    <td>{modalData.title}</td>
+                  </tr>
+                  <tr>
+                    <td>pre login</td>
+                    <td><pre>{JSON.stringify(modalData.login?.name, null, 2)}</pre></td>
+                  </tr>
+                  <tr>
+                    <td>checkName/isPass</td>
+                    <td>
+                      <span>{modalData.checkName}</span> / 
+                      {
+                        modalData.isPass === true
+                        ? <span style={{color: 'blue'}}> true</span>
+                        : <span style={{color: 'red'}}> false</span>
+                      }
+                    </td>
+                  </tr>
                   {
-                    modalData?.isPass === true
-                    ? <span style={{color: 'blue'}}> true</span>
-                    : <span style={{color: 'red'}}> false</span>
+                    modalData.checkName === 'custom' && (
+                      <tr>
+                        <td>check</td>
+                        <td><pre>{modalData.check?.toString()}</pre></td>
+                      </tr>
+                    )
                   }
-                </td>
-              </tr>
-              <tr>
-                <td>params</td>
-                <td><pre>{JSON.stringify(modalData?.params, null, 2)}</pre></td>
-              </tr>
-              <tr>
-                <td>action</td>
-                <td><pre>{modalData.action?.toString()}</pre></td>
-              </tr>
-              <tr>
-                <td>res?.data</td>
-                <td>
-                  <pre style={{maxHeight: '300px', overflowY: 'scroll'}}>{JSON.stringify(modalData?.res?.data, null, 2)}</pre>
-                </td>
-              </tr>
-              <tr>
-                <td>errorRes?.data</td>
-                <td><pre>{JSON.stringify(modalData?.errorRes?.data, null, 2)}</pre></td>
-              </tr>
-              <tr>
-                <td>res</td>
-                <td><pre style={{maxHeight: '300px', overflowY: 'scroll'}}>{JSON.stringify(modalData?.res, null, 2)}</pre></td>
-              </tr>
-              <tr>
-                <td>errorRes</td>
-                <td><pre style={{maxHeight: '300px', overflowY: 'scroll'}}>{JSON.stringify(modalData?.errorRes, null, 2)}</pre></td>
-              </tr>
-              <tr>
-                <td>raw</td>
-                <td><pre style={{maxHeight: '300px', overflowY: 'scroll'}}>{JSON.stringify(modalData, null, 2)}</pre></td>
-              </tr>
-            </tbody>
-          </table>
-        </Modal.Body>
-      </Modal>
+                  <tr>
+                    <td>params</td>
+                    <td><pre>{JSON.stringify(modalData.params, null, 2)}</pre></td>
+                  </tr>
+                  <tr>
+                    <td>action</td>
+                    <td><pre>{modalData.action?.toString()}</pre></td>
+                  </tr>
+                  <tr>
+                    <td>res?.data</td>
+                    <td>
+                      <pre style={{maxHeight: '300px', overflowY: 'scroll'}}>{JSON.stringify(modalData.res?.data, null, 2)}</pre>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>errorRes?.data</td>
+                    <td><pre>{JSON.stringify(modalData.errorRes?.data, null, 2)}</pre></td>
+                  </tr>
+                  <tr>
+                    <td>res</td>
+                    <td><pre style={{maxHeight: '300px', overflowY: 'scroll'}}>{JSON.stringify(modalData.res, null, 2)}</pre></td>
+                  </tr>
+                  <tr>
+                    <td>errorRes</td>
+                    <td><pre style={{maxHeight: '300px', overflowY: 'scroll'}}>{JSON.stringify(modalData.errorRes, null, 2)}</pre></td>
+                  </tr>
+                  <tr>
+                    <td>raw</td>
+                    <td><pre style={{maxHeight: '300px', overflowY: 'scroll'}}>{JSON.stringify(modalData, null, 2)}</pre></td>
+                  </tr>
+                </tbody>
+              </table>
+            </Modal.Body>
+          </Modal>
+        )
+      }
     </div>
   );
 }

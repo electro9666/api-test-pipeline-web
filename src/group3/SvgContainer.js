@@ -1,4 +1,4 @@
-export default function Component({svgData, index}) {
+export default function Component({svgData, groupIndex, mouseData}) {
   const getD = (svgObj) => {
     let cx0 = svgObj.x0 + 50;
     let cy0 = svgObj.y0;
@@ -21,10 +21,12 @@ export default function Component({svgData, index}) {
       {/* <path d="M 10 75 Q 50 10 100 75 T 190 75" stroke="black" stroke-linecap="round" stroke-dasharray="5,10,5" fill="none"/> */}
       {/* <path d="M 10 10, 50 50" stroke="green" strokeWidth="3" strokeLinecap="round" strokeDasharray="5,10,5" fill="green" /> */}
       {
-        svgData && svgData[index] && svgData[index].map((svgObj, svgi) => {
-          return <path key={svgi} d={getD(svgObj)}
-              stroke="currentColor" fill="none" strokeDasharray="none" strokeWidth="1" style={{color: 'green'}}
-            />
+        svgData && svgData[groupIndex] && svgData[groupIndex].map((svgTask, taskIndex) => {
+          return svgTask.map((svgObj, index3) => {
+            return <path key={index3} d={getD(svgObj)}
+                stroke="currentColor" fill="none" strokeDasharray="none" strokeWidth="1" style={{color: mouseData?.groupIndex === groupIndex && mouseData?.taskIndex === taskIndex ? 'blue' : 'green'}}
+              />
+          })
         })
       }
     </svg>
