@@ -5,6 +5,7 @@ import { ArrowRight } from 'react-bootstrap-icons';
 import { find } from 'lodash-es';
 import { CHECK, CHECK_FN } from '@/group3/check';
 import { user } from '@/group3/auth';
+import SvgContainer from '@/group3/SvgContainer';
 
 const getTaskTitle = (task) => {
   return task.checkName;
@@ -157,15 +158,7 @@ export default function App() {
               <div style={{fontSize: '20px', fontWeight: 'bold'}}>{index}. {group.title}</div>
               <div>
                 <div id={`group-${index}`} style={{width: '100%', display: 'flex', padding: '8px', position: 'relative'}}>
-                  <svg>
-                    {/* <path d="M 10 75 Q 50 10 100 75 T 190 75" stroke="black" stroke-linecap="round" stroke-dasharray="5,10,5" fill="none"/> */}
-                    {/* <path d="M 10 10, 50 50" stroke="green" strokeWidth="3" strokeLinecap="round" strokeDasharray="5,10,5" fill="green" /> */}
-                    {
-                      svgData && svgData[index] && svgData[index].map((svgObj, svgi) => {
-                        return <path key={svgi} d={`M ${svgObj.x0} ${svgObj.y0} C ${svgObj.x0 + 50} ${svgObj.y0 + 20} ${svgObj.x1 - 50} ${svgObj.y1 - 20} ${svgObj.x1} ${svgObj.y1}`} stroke="currentColor" fill="none" strokeDasharray="none" strokeWidth="1" style={{color: 'green'}} />
-                      })
-                    }
-                  </svg>
+                  <SvgContainer svgData={svgData} index={index}/>
                   {
                     group.taskList.map((task, index2) => {
                       return (
@@ -174,7 +167,7 @@ export default function App() {
                             {
                               task.refTaskId ? 'ref: ' + task.refTaskId : ''
                             }
-                            <div className="task-circle" style={{border: `1px dashed ${task.isPass ? 'blue' : 'red'}`, padding: '10px', borderRadius: '25px', width: '80px', height: '80px', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer', background: 'white', zIndex: 2}}
+                            <div className="task-circle" style={{border: `1px dashed ${task.isPass ? 'blue' : 'red'}`, padding: '10px', borderRadius: '25px', width: '80px', height: '80px', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer', background: 'rgba(255, 255, 255, 0.8)', zIndex: 2}}
                               onClick={() => {
                                 setModalData(task);
                                 setShow(true);
