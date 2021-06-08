@@ -7,6 +7,7 @@ import App from './App';
 import App2 from './App2';
 import App3 from './App3';
 import Test3 from './Test3';
+import View3 from './view3/View3';
 
 import './styles/global.scss';
 
@@ -20,6 +21,7 @@ ReactDOM.render(
         <Route path="/app2" component={App2} />
         <Route path="/app3" component={App3} />
         <Route path="/test3" component={Test3} />
+        <Route path="/view3" component={View3} />
       </Switch>
     </Router>
   </React.StrictMode>,

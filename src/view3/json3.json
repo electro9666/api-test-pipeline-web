@@ -1,0 +1,3097 @@
+[
+  {
+    "title": "로그인 실패",
+    "taskList": [
+      {
+        "title": "사용자(user1) 로그인 실패(잘못된 패스워드)",
+        "check": "S401",
+        "row": 0,
+        "params": {
+          "username": "user1",
+          "password": "xxxx"
+        },
+        "errorRes": {
+          "data": {
+            "code": "401",
+            "message": "Bad credentials"
+          },
+          "status": 401,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-length": "42",
+            "content-type": "application/json;charset=utf-8",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/common/login",
+            "method": "post",
+            "data": "{\"username\":\"user1\",\"password\":\"xxxx\"}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S401",
+        "isPass": true
+      },
+      {
+        "title": "사용자(user1) 로그인 실패(잘못된 username)",
+        "check": "S401",
+        "row": 0,
+        "params": {
+          "username": "user11111",
+          "password": "1111"
+        },
+        "errorRes": {
+          "data": {
+            "code": "401",
+            "message": "Bad credentials"
+          },
+          "status": 401,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-length": "42",
+            "content-type": "application/json;charset=utf-8",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/common/login",
+            "method": "post",
+            "data": "{\"username\":\"user11111\",\"password\":\"1111\"}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S401",
+        "isPass": true
+      },
+      {
+        "title": "사용자(user1) 로그인 실패(파라메터 없음)",
+        "check": "S401",
+        "row": 0,
+        "errorRes": {
+          "data": {
+            "code": "401",
+            "message": "Content-Type is null"
+          },
+          "status": 401,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-length": "47",
+            "content-type": "application/json;charset=utf-8",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/common/login",
+            "method": "post",
+            "headers": {
+              "Accept": "application/json, text/plain, */*"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S401",
+        "isPass": true
+      }
+    ]
+  },
+  {
+    "title": "권한 체크",
+    "taskList": [
+      {
+        "title": "최근 상품 목록 조회",
+        "login": {
+          "name": "user1"
+        },
+        "check": "S200",
+        "row": 0,
+        "res": {
+          "data": {
+            "result": [
+              {
+                "id": 5323,
+                "name": "상품1623133005816",
+                "description": "1",
+                "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+                "price": 32,
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:45.822662",
+                "updateDate": "2021-06-08T15:16:45.869664",
+                "storeId": 6416,
+                "storeName": "스토어-1623133005795",
+                "categoryId": 1,
+                "options": [
+                  {
+                    "id": 7143,
+                    "name": "노랑",
+                    "price": 32,
+                    "quantity": 22
+                  },
+                  {
+                    "id": 7144,
+                    "name": "검정",
+                    "price": 33,
+                    "quantity": 22
+                  }
+                ]
+              },
+              {
+                "id": 5322,
+                "name": "상품1623133005700",
+                "description": "1",
+                "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+                "price": 33,
+                "status": "CLOSE",
+                "regDate": "2021-06-08T15:16:45.713667",
+                "updateDate": "2021-06-08T15:16:45.762661",
+                "storeId": 6415,
+                "storeName": "스토어-1623133005678",
+                "categoryId": 1,
+                "options": [
+                  {
+                    "id": 7141,
+                    "name": "노랑",
+                    "price": 33,
+                    "quantity": 22
+                  },
+                  {
+                    "id": 7142,
+                    "name": "검정",
+                    "price": 33,
+                    "quantity": 22
+                  }
+                ]
+              },
+              {
+                "id": 5321,
+                "name": "상품1623133005580",
+                "description": "1",
+                "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+                "price": 33,
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:45.591665",
+                "updateDate": "2021-06-08T15:16:45.591665",
+                "storeId": 6414,
+                "storeName": "스토어-1623133005564",
+                "categoryId": 1,
+                "options": [
+                  {
+                    "id": 7137,
+                    "name": "노랑",
+                    "price": 33,
+                    "quantity": 22
+                  },
+                  {
+                    "id": 7138,
+                    "name": "검정",
+                    "price": 33,
+                    "quantity": 22
+                  }
+                ]
+              },
+              {
+                "id": 5320,
+                "name": "상품-1623133005418",
+                "description": "1",
+                "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+                "price": 33,
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:45.429662",
+                "updateDate": "2021-06-08T15:16:45.539661",
+                "storeId": 6413,
+                "storeName": "스토어-1623133005390",
+                "categoryId": 1,
+                "options": [
+                  {
+                    "id": 7134,
+                    "name": "노랑",
+                    "price": 33,
+                    "quantity": 22
+                  },
+                  {
+                    "id": 7135,
+                    "name": "검정",
+                    "price": 33,
+                    "quantity": 22
+                  },
+                  {
+                    "id": 7136,
+                    "name": "신규옵션",
+                    "price": 1,
+                    "quantity": 22
+                  }
+                ]
+              },
+              {
+                "id": 5318,
+                "name": "상품-1623133004623",
+                "description": "1",
+                "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+                "price": 33,
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:45.297664",
+                "updateDate": "2021-06-08T15:16:45.297664",
+                "storeId": 6412,
+                "storeName": "스토어-1623133005265",
+                "categoryId": 1,
+                "options": [
+                  {
+                    "id": 7131,
+                    "name": "노랑",
+                    "price": 33,
+                    "quantity": 22
+                  },
+                  {
+                    "id": 7132,
+                    "name": "검정",
+                    "price": 33,
+                    "quantity": 22
+                  }
+                ]
+              },
+              {
+                "id": 5317,
+                "name": "상품1623132976749",
+                "description": "1",
+                "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+                "price": 32,
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:16.759098",
+                "updateDate": "2021-06-08T15:16:16.825093",
+                "storeId": 6402,
+                "storeName": "스토어-1623132976732",
+                "categoryId": 1,
+                "options": [
+                  {
+                    "id": 7129,
+                    "name": "노랑",
+                    "price": 32,
+                    "quantity": 22
+                  },
+                  {
+                    "id": 7130,
+                    "name": "검정",
+                    "price": 33,
+                    "quantity": 22
+                  }
+                ]
+              },
+              {
+                "id": 5316,
+                "name": "상품1623132976631",
+                "description": "1",
+                "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+                "price": 33,
+                "status": "CLOSE",
+                "regDate": "2021-06-08T15:16:16.639094",
+                "updateDate": "2021-06-08T15:16:16.690091",
+                "storeId": 6401,
+                "storeName": "스토어-1623132976541",
+                "categoryId": 1,
+                "options": [
+                  {
+                    "id": 7127,
+                    "name": "노랑",
+                    "price": 33,
+                    "quantity": 22
+                  },
+                  {
+                    "id": 7128,
+                    "name": "검정",
+                    "price": 33,
+                    "quantity": 22
+                  }
+                ]
+              },
+              {
+                "id": 5315,
+                "name": "상품1623132976446",
+                "description": "1",
+                "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+                "price": 33,
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:16.460092",
+                "updateDate": "2021-06-08T15:16:16.460092",
+                "storeId": 6400,
+                "storeName": "스토어-1623132976425",
+                "categoryId": 1,
+                "options": [
+                  {
+                    "id": 7123,
+                    "name": "노랑",
+                    "price": 33,
+                    "quantity": 22
+                  },
+                  {
+                    "id": 7124,
+                    "name": "검정",
+                    "price": 33,
+                    "quantity": 22
+                  }
+                ]
+              },
+              {
+                "id": 5314,
+                "name": "상품-1623132976288",
+                "description": "1",
+                "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+                "price": 33,
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:16.3001",
+                "updateDate": "2021-06-08T15:16:16.395102",
+                "storeId": 6399,
+                "storeName": "스토어-1623132976271",
+                "categoryId": 1,
+                "options": [
+                  {
+                    "id": 7120,
+                    "name": "노랑",
+                    "price": 33,
+                    "quantity": 22
+                  },
+                  {
+                    "id": 7121,
+                    "name": "검정",
+                    "price": 33,
+                    "quantity": 22
+                  },
+                  {
+                    "id": 7122,
+                    "name": "신규옵션",
+                    "price": 1,
+                    "quantity": 22
+                  }
+                ]
+              },
+              {
+                "id": 5312,
+                "name": "상품-1623132975414",
+                "description": "1",
+                "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+                "price": 33,
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:16.186095",
+                "updateDate": "2021-06-08T15:16:16.186095",
+                "storeId": 6398,
+                "storeName": "스토어-1623132976150",
+                "categoryId": 1,
+                "options": [
+                  {
+                    "id": 7117,
+                    "name": "노랑",
+                    "price": 33,
+                    "quantity": 22
+                  },
+                  {
+                    "id": 7118,
+                    "name": "검정",
+                    "price": 33,
+                    "quantity": 22
+                  }
+                ]
+              }
+            ],
+            "total": 1260
+          },
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/user/recent",
+            "method": "get",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjEsInVzZXJuYW1lIjoidXNlcjEiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.c3VCasrt1S-wD4hdUWvEDt5velmUoziUczeZ_Swz3UQ"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "title": "스토어 조회",
+        "login": {
+          "name": "user4"
+        },
+        "check": "S403",
+        "row": 0,
+        "errorRes": {
+          "data": {
+            "timestamp": "2021-06-08T06:17:27.320+00:00",
+            "status": 403,
+            "error": "Forbidden",
+            "message": "Forbidden",
+            "path": "/api/secure/seller/store/list"
+          },
+          "status": 403,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/store/list",
+            "method": "get",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjQsInVzZXJuYW1lIjoidXNlcjQiLCJyb2xlcyI6WyJST0xFX1VTRVIiXX0.A7b-B0Jh1tOb3agCax7n0ypWCCijHxIUxsFv4GS1dMA"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S403",
+        "isPass": true
+      }
+    ]
+  },
+  {
+    "title": "스토어 등록",
+    "taskList": [
+      {
+        "title": "스토어 등록",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S200",
+        "row": 0,
+        "params": {
+          "name": "스토어-1623133046775",
+          "status": "OPEN"
+        },
+        "res": {
+          "data": 6417,
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/store",
+            "method": "post",
+            "data": "{\"name\":\"스토어-1623133046775\",\"status\":\"OPEN\"}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "title": "스토어 등록 실패(동일한 이름)",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S400",
+        "row": 0,
+        "params": {
+          "name": "스토어-1623133046775",
+          "status": "OPEN"
+        },
+        "errorRes": {
+          "data": {
+            "message": "could not execute statement; SQL [n/a]; constraint [UK_d0p5ly1cv6guij7sq1mbnr8ec]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"
+          },
+          "status": 400,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/store",
+            "method": "post",
+            "data": "{\"name\":\"스토어-1623133046775\",\"status\":\"OPEN\"}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S400",
+        "isPass": true
+      },
+      {
+        "title": "스토어 등록 실패(파라메터 없음)",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S400",
+        "row": 0,
+        "errorRes": {
+          "data": {
+            "message": "Required request body is missing: public java.lang.Long org.example.controller.SellerController.createStore(org.example.security.dto.LoginMemberDTO,org.example.dto.StoreRequestDto$Post)"
+          },
+          "status": 400,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/store",
+            "method": "post",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S400",
+        "isPass": true
+      },
+      {
+        "title": "스토어 등록 실패(이름이 없음)",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S400",
+        "row": 0,
+        "params": {
+          "status": "OPEN"
+        },
+        "errorRes": {
+          "data": {
+            "message": "could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"
+          },
+          "status": 400,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/store",
+            "method": "post",
+            "data": "{\"status\":\"OPEN\"}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S400",
+        "isPass": true
+      },
+      {
+        "title": "스토어 등록 실패(상태가 없음)",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S400",
+        "row": 0,
+        "params": {
+          "name": "A"
+        },
+        "errorRes": {
+          "data": {
+            "message": "could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"
+          },
+          "status": 400,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/store",
+            "method": "post",
+            "data": "{\"name\":\"A\"}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S400",
+        "isPass": true
+      },
+      {
+        "title": "스토어 등록 실패(잘못된 상태값)",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S400",
+        "row": 0,
+        "params": {
+          "status": "A"
+        },
+        "errorRes": {
+          "data": {
+            "message": "JSON parse error: Cannot deserialize value of type `org.example.constant.StoreStatus` from String \"A\": not one of the values accepted for Enum class: [CLOSE, OPEN]; nested exception is com.fasterxml.jackson.databind.exc.InvalidFormatException: Cannot deserialize value of type `org.example.constant.StoreStatus` from String \"A\": not one of the values accepted for Enum class: [CLOSE, OPEN]\n at [Source: (PushbackInputStream); line: 1, column: 11] (through reference chain: org.example.dto.StoreRequestDto$Post[\"status\"])"
+          },
+          "status": 400,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/store",
+            "method": "post",
+            "data": "{\"status\":\"A\"}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S400",
+        "isPass": true
+      }
+    ]
+  },
+  {
+    "title": "스토어 등록 후 개수 조회",
+    "taskList": [
+      {
+        "id": "listStore1",
+        "title": "스토어 조회",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S200",
+        "row": 0,
+        "res": {
+          "data": {
+            "result": [
+              {
+                "id": 6417,
+                "name": "스토어-1623133046775",
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:17:27.414591",
+                "updateDate": "2021-06-08T15:17:27.414591"
+              },
+              {
+                "id": 6416,
+                "name": "스토어-1623133005795",
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:45.802664",
+                "updateDate": "2021-06-08T15:16:45.802664"
+              },
+              {
+                "id": 6415,
+                "name": "스토어-1623133005678",
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:45.693663",
+                "updateDate": "2021-06-08T15:16:45.693663"
+              },
+              {
+                "id": 6414,
+                "name": "스토어-1623133005564",
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:45.572664",
+                "updateDate": "2021-06-08T15:16:45.572664"
+              },
+              {
+                "id": 6413,
+                "name": "스토어-1623133005390",
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:45.405664",
+                "updateDate": "2021-06-08T15:16:45.405664"
+              },
+              {
+                "id": 6412,
+                "name": "스토어-1623133005265",
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:45.273661",
+                "updateDate": "2021-06-08T15:16:45.273661"
+              },
+              {
+                "id": 6411,
+                "name": "스토어-1623133005230",
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:45.236665",
+                "updateDate": "2021-06-08T15:16:45.236665"
+              },
+              {
+                "id": 6407,
+                "name": "스토어-1623133004623",
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:45.138661",
+                "updateDate": "2021-06-08T15:16:45.138661"
+              },
+              {
+                "id": 6402,
+                "name": "스토어-1623132976732",
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:16.741096",
+                "updateDate": "2021-06-08T15:16:16.741096"
+              },
+              {
+                "id": 6401,
+                "name": "스토어-1623132976541",
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:16.551106",
+                "updateDate": "2021-06-08T15:16:16.551106"
+              }
+            ],
+            "total": 1999
+          },
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/store/list",
+            "method": "get",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "title": "스토어 등록",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S200",
+        "row": 0,
+        "params": {
+          "name": "스토어-1623133047555",
+          "status": "OPEN"
+        },
+        "res": {
+          "data": 6421,
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/store",
+            "method": "post",
+            "data": "{\"name\":\"스토어-1623133047555\",\"status\":\"OPEN\"}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "title": "스토어 조회(개수 1개 증가 확인)",
+        "login": {
+          "name": "user3"
+        },
+        "row": 1,
+        "params": {},
+        "res": {
+          "data": {
+            "result": [
+              {
+                "id": 6421,
+                "name": "스토어-1623133047555",
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:17:27.566592",
+                "updateDate": "2021-06-08T15:17:27.566592"
+              },
+              {
+                "id": 6417,
+                "name": "스토어-1623133046775",
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:17:27.414591",
+                "updateDate": "2021-06-08T15:17:27.414591"
+              },
+              {
+                "id": 6416,
+                "name": "스토어-1623133005795",
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:45.802664",
+                "updateDate": "2021-06-08T15:16:45.802664"
+              },
+              {
+                "id": 6415,
+                "name": "스토어-1623133005678",
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:45.693663",
+                "updateDate": "2021-06-08T15:16:45.693663"
+              },
+              {
+                "id": 6414,
+                "name": "스토어-1623133005564",
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:45.572664",
+                "updateDate": "2021-06-08T15:16:45.572664"
+              },
+              {
+                "id": 6413,
+                "name": "스토어-1623133005390",
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:45.405664",
+                "updateDate": "2021-06-08T15:16:45.405664"
+              },
+              {
+                "id": 6412,
+                "name": "스토어-1623133005265",
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:45.273661",
+                "updateDate": "2021-06-08T15:16:45.273661"
+              },
+              {
+                "id": 6411,
+                "name": "스토어-1623133005230",
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:45.236665",
+                "updateDate": "2021-06-08T15:16:45.236665"
+              },
+              {
+                "id": 6407,
+                "name": "스토어-1623133004623",
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:45.138661",
+                "updateDate": "2021-06-08T15:16:45.138661"
+              },
+              {
+                "id": 6402,
+                "name": "스토어-1623132976732",
+                "status": "OPEN",
+                "regDate": "2021-06-08T15:16:16.741096",
+                "updateDate": "2021-06-08T15:16:16.741096"
+              }
+            ],
+            "total": 2000
+          },
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/store/list",
+            "method": "get",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "custom",
+        "refTaskId": [
+          "listStore1"
+        ],
+        "isPass": true
+      }
+    ]
+  },
+  {
+    "title": "상품 등록",
+    "taskList": [
+      {
+        "id": "postStore",
+        "title": "스토어 등록",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S200",
+        "row": 0,
+        "params": {
+          "name": "스토어-1623133047614",
+          "status": "OPEN"
+        },
+        "res": {
+          "data": 6422,
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/store",
+            "method": "post",
+            "data": "{\"name\":\"스토어-1623133047614\",\"status\":\"OPEN\"}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "id": "postProduct",
+        "title": "상품 등록",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S200",
+        "row": 0,
+        "refTaskId": [
+          "postStore"
+        ],
+        "params": {
+          "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+          "categoryId": "1",
+          "description": "1",
+          "name": "상품-1623133046775",
+          "options": [
+            {
+              "name": "노랑",
+              "price": "33",
+              "quantity": "22"
+            },
+            {
+              "name": "검정",
+              "price": "33",
+              "quantity": "22"
+            }
+          ],
+          "status": "OPEN",
+          "storeId": 6422
+        },
+        "res": {
+          "data": 5324,
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/product",
+            "method": "post",
+            "data": "{\"background\":\"linear-gradient(181deg, #9661bd, #494b9b)\",\"categoryId\":\"1\",\"description\":\"1\",\"name\":\"상품-1623133046775\",\"options\":[{\"name\":\"노랑\",\"price\":\"33\",\"quantity\":\"22\"},{\"name\":\"검정\",\"price\":\"33\",\"quantity\":\"22\"}],\"status\":\"OPEN\",\"storeId\":6422}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "title": "상품 등록 실패(이름 중복)",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S400",
+        "row": 0,
+        "refTaskId": [
+          "postStore"
+        ],
+        "params": {
+          "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+          "categoryId": "1",
+          "description": "1",
+          "name": "상품-1623133046775",
+          "options": [
+            {
+              "name": "11",
+              "price": "33",
+              "quantity": "22"
+            }
+          ],
+          "status": "OPEN",
+          "storeId": 6422
+        },
+        "errorRes": {
+          "data": {
+            "message": "could not execute statement; SQL [n/a]; constraint [UK_jmivyxk9rmgysrmsqw15lqr5b]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"
+          },
+          "status": 400,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/product",
+            "method": "post",
+            "data": "{\"background\":\"linear-gradient(181deg, #9661bd, #494b9b)\",\"categoryId\":\"1\",\"description\":\"1\",\"name\":\"상품-1623133046775\",\"options\":[{\"name\":\"11\",\"price\":\"33\",\"quantity\":\"22\"}],\"status\":\"OPEN\",\"storeId\":6422}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S400",
+        "isPass": true
+      },
+      {
+        "title": "상품 등록 실패(옵션없음)",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S400",
+        "row": 0,
+        "refTaskId": [
+          "postStore"
+        ],
+        "params": {
+          "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+          "categoryId": "1",
+          "description": "1",
+          "name": "name+1623133047744",
+          "status": "OPEN",
+          "storeId": 6422
+        },
+        "errorRes": {
+          "data": {
+            "message": "option.size should be more than 0."
+          },
+          "status": 400,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/product",
+            "method": "post",
+            "data": "{\"background\":\"linear-gradient(181deg, #9661bd, #494b9b)\",\"categoryId\":\"1\",\"description\":\"1\",\"name\":\"name+1623133047744\",\"status\":\"OPEN\",\"storeId\":6422}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S400",
+        "isPass": true
+      },
+      {
+        "title": "상품 등록 실패(옵션없음)",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S400",
+        "row": 0,
+        "refTaskId": [
+          "postStore"
+        ],
+        "params": {
+          "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+          "categoryId": "1",
+          "description": "1",
+          "name": "name+1623133047761",
+          "options": [],
+          "status": "OPEN",
+          "storeId": 6422
+        },
+        "errorRes": {
+          "data": {
+            "message": "option.size should be more than 0."
+          },
+          "status": 400,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/product",
+            "method": "post",
+            "data": "{\"background\":\"linear-gradient(181deg, #9661bd, #494b9b)\",\"categoryId\":\"1\",\"description\":\"1\",\"name\":\"name+1623133047761\",\"options\":[],\"status\":\"OPEN\",\"storeId\":6422}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S400",
+        "isPass": true
+      },
+      {
+        "title": "상품 등록 실패(옵션 가격 0원)",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S400",
+        "row": 0,
+        "refTaskId": [
+          "postStore"
+        ],
+        "params": {
+          "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+          "categoryId": "1",
+          "description": "1",
+          "name": "name+1623133047777",
+          "options": [
+            {
+              "name": "11",
+              "price": "0",
+              "quantity": "22"
+            }
+          ],
+          "status": "OPEN",
+          "storeId": 6422
+        },
+        "errorRes": {
+          "data": {
+            "message": "option.price should be more than 0."
+          },
+          "status": 400,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/product",
+            "method": "post",
+            "data": "{\"background\":\"linear-gradient(181deg, #9661bd, #494b9b)\",\"categoryId\":\"1\",\"description\":\"1\",\"name\":\"name+1623133047777\",\"options\":[{\"name\":\"11\",\"price\":\"0\",\"quantity\":\"22\"}],\"status\":\"OPEN\",\"storeId\":6422}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S400",
+        "isPass": true
+      }
+    ]
+  },
+  {
+    "title": "상품 수정",
+    "taskList": [
+      {
+        "id": "postStore",
+        "title": "스토어 등록",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S200",
+        "row": 0,
+        "params": {
+          "name": "스토어-1623133047795",
+          "status": "OPEN"
+        },
+        "res": {
+          "data": 6423,
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/store",
+            "method": "post",
+            "data": "{\"name\":\"스토어-1623133047795\",\"status\":\"OPEN\"}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "id": "postProduct",
+        "title": "상품 등록",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S200",
+        "row": 0,
+        "refTaskId": [
+          "postStore"
+        ],
+        "params": {
+          "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+          "categoryId": "1",
+          "description": "1",
+          "name": "상품-1623133047817",
+          "options": [
+            {
+              "name": "노랑",
+              "price": "33",
+              "quantity": "22"
+            },
+            {
+              "name": "검정",
+              "price": "33",
+              "quantity": "22"
+            }
+          ],
+          "status": "OPEN",
+          "storeId": 6423
+        },
+        "res": {
+          "data": 5326,
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/product",
+            "method": "post",
+            "data": "{\"background\":\"linear-gradient(181deg, #9661bd, #494b9b)\",\"categoryId\":\"1\",\"description\":\"1\",\"name\":\"상품-1623133047817\",\"options\":[{\"name\":\"노랑\",\"price\":\"33\",\"quantity\":\"22\"},{\"name\":\"검정\",\"price\":\"33\",\"quantity\":\"22\"}],\"status\":\"OPEN\",\"storeId\":6423}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "id": "detailProduct",
+        "title": "상품 상세 조회",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S200",
+        "row": 0,
+        "refTaskId": [
+          "postProduct"
+        ],
+        "params": {
+          "id": 5326
+        },
+        "res": {
+          "data": {
+            "id": 5326,
+            "name": "상품-1623133047817",
+            "description": "1",
+            "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+            "price": 33,
+            "status": "OPEN",
+            "regDate": "2021-06-08T15:17:27.829591",
+            "updateDate": "2021-06-08T15:17:27.829591",
+            "storeId": 6423,
+            "storeName": "스토어-1623133047795",
+            "categoryId": 1,
+            "options": [
+              {
+                "id": 7148,
+                "name": "노랑",
+                "price": 33,
+                "quantity": 22
+              },
+              {
+                "id": 7149,
+                "name": "검정",
+                "price": 33,
+                "quantity": 22
+              }
+            ]
+          },
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/product/detail/5326",
+            "method": "get",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "title": "상품 수정",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S200",
+        "row": 0,
+        "refTaskId": [
+          "detailProduct"
+        ],
+        "params": {
+          "id": 5326,
+          "name": "상품-1623133047817",
+          "description": "1",
+          "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+          "price": 33,
+          "status": "OPEN",
+          "regDate": "2021-06-08T15:17:27.829591",
+          "updateDate": "2021-06-08T15:17:27.829591",
+          "storeId": 6423,
+          "storeName": "스토어-1623133047795",
+          "categoryId": 1,
+          "options": [
+            {
+              "id": 7148,
+              "name": "노랑",
+              "price": 33,
+              "quantity": 22
+            },
+            {
+              "id": 7149,
+              "name": "검정",
+              "price": 33,
+              "quantity": 22
+            }
+          ]
+        },
+        "res": {
+          "data": 5326,
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/product",
+            "method": "put",
+            "data": "{\"id\":5326,\"name\":\"상품-1623133047817\",\"description\":\"1\",\"background\":\"linear-gradient(181deg, #9661bd, #494b9b)\",\"price\":33,\"status\":\"OPEN\",\"regDate\":\"2021-06-08T15:17:27.829591\",\"updateDate\":\"2021-06-08T15:17:27.829591\",\"storeId\":6423,\"storeName\":\"스토어-1623133047795\",\"categoryId\":1,\"options\":[{\"id\":7148,\"name\":\"노랑\",\"price\":33,\"quantity\":22},{\"id\":7149,\"name\":\"검정\",\"price\":33,\"quantity\":22}]}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "title": "상품 수정 실패(옵션 삭제)",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S400",
+        "row": 0,
+        "refTaskId": [
+          "detailProduct"
+        ],
+        "params": {
+          "id": 5326,
+          "name": "상품-1623133047817",
+          "description": "1",
+          "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+          "price": 33,
+          "status": "OPEN",
+          "regDate": "2021-06-08T15:17:27.829591",
+          "updateDate": "2021-06-08T15:17:27.829591",
+          "storeId": 6423,
+          "storeName": "스토어-1623133047795",
+          "categoryId": 1,
+          "options": [
+            {
+              "id": 7148,
+              "name": "노랑",
+              "price": 33,
+              "quantity": 22
+            }
+          ]
+        },
+        "errorRes": {
+          "data": {
+            "message": "there is not option [7149] "
+          },
+          "status": 400,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/product",
+            "method": "put",
+            "data": "{\"id\":5326,\"name\":\"상품-1623133047817\",\"description\":\"1\",\"background\":\"linear-gradient(181deg, #9661bd, #494b9b)\",\"price\":33,\"status\":\"OPEN\",\"regDate\":\"2021-06-08T15:17:27.829591\",\"updateDate\":\"2021-06-08T15:17:27.829591\",\"storeId\":6423,\"storeName\":\"스토어-1623133047795\",\"categoryId\":1,\"options\":[{\"id\":7148,\"name\":\"노랑\",\"price\":33,\"quantity\":22}]}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S400",
+        "isPass": true
+      },
+      {
+        "title": "상품 수정 (옵션 1개 추가)",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S200",
+        "row": 0,
+        "refTaskId": [
+          "detailProduct"
+        ],
+        "params": {
+          "id": 5326,
+          "name": "상품-1623133047817",
+          "description": "1",
+          "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+          "price": 33,
+          "status": "OPEN",
+          "regDate": "2021-06-08T15:17:27.829591",
+          "updateDate": "2021-06-08T15:17:27.829591",
+          "storeId": 6423,
+          "storeName": "스토어-1623133047795",
+          "categoryId": 1,
+          "options": [
+            {
+              "id": 7148,
+              "name": "노랑",
+              "price": 33,
+              "quantity": 22
+            },
+            {
+              "id": 7149,
+              "name": "검정",
+              "price": 33,
+              "quantity": 22
+            },
+            {
+              "name": "신규옵션",
+              "price": "1",
+              "quantity": "22"
+            }
+          ]
+        },
+        "res": {
+          "data": 5326,
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/product",
+            "method": "put",
+            "data": "{\"id\":5326,\"name\":\"상품-1623133047817\",\"description\":\"1\",\"background\":\"linear-gradient(181deg, #9661bd, #494b9b)\",\"price\":33,\"status\":\"OPEN\",\"regDate\":\"2021-06-08T15:17:27.829591\",\"updateDate\":\"2021-06-08T15:17:27.829591\",\"storeId\":6423,\"storeName\":\"스토어-1623133047795\",\"categoryId\":1,\"options\":[{\"id\":7148,\"name\":\"노랑\",\"price\":33,\"quantity\":22},{\"id\":7149,\"name\":\"검정\",\"price\":33,\"quantity\":22},{\"name\":\"신규옵션\",\"price\":\"1\",\"quantity\":\"22\"}]}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "title": "상품 상세 조회(옵션개수 1개 추가된 것 확인)",
+        "login": {
+          "name": "user3"
+        },
+        "row": 0,
+        "refTaskId": [
+          "postProduct",
+          "detailProduct"
+        ],
+        "params": {
+          "id": 5326
+        },
+        "res": {
+          "data": {
+            "id": 5326,
+            "name": "상품-1623133047817",
+            "description": "1",
+            "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+            "price": 33,
+            "status": "OPEN",
+            "regDate": "2021-06-08T15:17:27.829591",
+            "updateDate": "2021-06-08T15:17:27.964595",
+            "storeId": 6423,
+            "storeName": "스토어-1623133047795",
+            "categoryId": 1,
+            "options": [
+              {
+                "id": 7148,
+                "name": "노랑",
+                "price": 33,
+                "quantity": 22
+              },
+              {
+                "id": 7149,
+                "name": "검정",
+                "price": 33,
+                "quantity": 22
+              },
+              {
+                "id": 7150,
+                "name": "신규옵션",
+                "price": 1,
+                "quantity": 22
+              }
+            ]
+          },
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/product/detail/5326",
+            "method": "get",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "custom",
+        "isPass": true
+      }
+    ]
+  },
+  {
+    "title": "장바구니 추가(재고)",
+    "taskList": [
+      {
+        "id": "postStore",
+        "title": "스토어 등록",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S200",
+        "row": 0,
+        "params": {
+          "name": "스토어-1623133048017",
+          "status": "OPEN"
+        },
+        "res": {
+          "data": 6424,
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/store",
+            "method": "post",
+            "data": "{\"name\":\"스토어-1623133048017\",\"status\":\"OPEN\"}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "id": "postProduct1",
+        "title": "상품1 등록",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S200",
+        "row": 0,
+        "refTaskId": [
+          "postStore"
+        ],
+        "params": {
+          "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+          "categoryId": "1",
+          "description": "1",
+          "name": "상품1623133048043",
+          "options": [
+            {
+              "name": "노랑",
+              "price": "33",
+              "quantity": "22"
+            },
+            {
+              "name": "검정",
+              "price": "33",
+              "quantity": "22"
+            }
+          ],
+          "status": "OPEN",
+          "storeId": 6424
+        },
+        "res": {
+          "data": 5327,
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/product",
+            "method": "post",
+            "data": "{\"background\":\"linear-gradient(181deg, #9661bd, #494b9b)\",\"categoryId\":\"1\",\"description\":\"1\",\"name\":\"상품1623133048043\",\"options\":[{\"name\":\"노랑\",\"price\":\"33\",\"quantity\":\"22\"},{\"name\":\"검정\",\"price\":\"33\",\"quantity\":\"22\"}],\"status\":\"OPEN\",\"storeId\":6424}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "id": "detailProductUser",
+        "title": "상품1 상세 조회(사용자)",
+        "login": {
+          "name": "user1"
+        },
+        "row": 1,
+        "check": "S200",
+        "refTaskId": [
+          "postProduct1"
+        ],
+        "params": {
+          "id": 5327
+        },
+        "res": {
+          "data": {
+            "id": 5327,
+            "name": "상품1623133048043",
+            "description": "1",
+            "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+            "price": 33,
+            "status": "OPEN",
+            "regDate": "2021-06-08T15:17:28.062596",
+            "updateDate": "2021-06-08T15:17:28.062596",
+            "storeId": 6424,
+            "storeName": "스토어-1623133048017",
+            "categoryId": 1,
+            "options": [
+              {
+                "id": 7151,
+                "name": "노랑",
+                "price": 33,
+                "quantity": 22
+              },
+              {
+                "id": 7152,
+                "name": "검정",
+                "price": 33,
+                "quantity": 22
+              }
+            ]
+          },
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/user/product/5327",
+            "method": "get",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjEsInVzZXJuYW1lIjoidXNlcjEiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.c3VCasrt1S-wD4hdUWvEDt5velmUoziUczeZ_Swz3UQ"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "title": "장바구니 추가 - 상품1",
+        "login": {
+          "name": "user1"
+        },
+        "row": 1,
+        "check": "S200",
+        "refTaskId": [
+          "detailProductUser"
+        ],
+        "params": {
+          "productId": 5327,
+          "cartOptions": [
+            {
+              "id": 7151,
+              "count": 22,
+              "price": 33
+            }
+          ]
+        },
+        "res": {
+          "data": 7153,
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/user/cart",
+            "method": "post",
+            "data": "{\"productId\":5327,\"cartOptions\":[{\"id\":7151,\"count\":22,\"price\":33}]}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjEsInVzZXJuYW1lIjoidXNlcjEiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.c3VCasrt1S-wD4hdUWvEDt5velmUoziUczeZ_Swz3UQ"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "title": "장바구니 추가 실패 (재고 초과) - 상품1",
+        "login": {
+          "name": "user1"
+        },
+        "check": "S400",
+        "row": 1,
+        "refTaskId": [
+          "detailProductUser"
+        ],
+        "params": {
+          "productId": 5327,
+          "cartOptions": [
+            {
+              "id": 7151,
+              "count": 23,
+              "price": 33
+            }
+          ]
+        },
+        "errorRes": {
+          "data": {
+            "message": "[노랑] 옵션의 재고를 초과하였습니다. 수량을 조절해주세요."
+          },
+          "status": 400,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/user/cart",
+            "method": "post",
+            "data": "{\"productId\":5327,\"cartOptions\":[{\"id\":7151,\"count\":23,\"price\":33}]}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjEsInVzZXJuYW1lIjoidXNlcjEiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.c3VCasrt1S-wD4hdUWvEDt5velmUoziUczeZ_Swz3UQ"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S400",
+        "isPass": true
+      }
+    ]
+  },
+  {
+    "title": "장바구니 추가(상품상태 CLOSE)",
+    "taskList": [
+      {
+        "id": "postStore",
+        "title": "스토어 등록",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S200",
+        "row": 0,
+        "params": {
+          "name": "스토어-1623133048193",
+          "status": "OPEN"
+        },
+        "res": {
+          "data": 6425,
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/store",
+            "method": "post",
+            "data": "{\"name\":\"스토어-1623133048193\",\"status\":\"OPEN\"}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "id": "postProduct1",
+        "title": "상품1 등록",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S200",
+        "row": 0,
+        "refTaskId": [
+          "postStore"
+        ],
+        "params": {
+          "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+          "categoryId": "1",
+          "description": "1",
+          "name": "상품1623133048211",
+          "options": [
+            {
+              "name": "노랑",
+              "price": "33",
+              "quantity": "22"
+            },
+            {
+              "name": "검정",
+              "price": "33",
+              "quantity": "22"
+            }
+          ],
+          "status": "OPEN",
+          "storeId": 6425
+        },
+        "res": {
+          "data": 5328,
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/product",
+            "method": "post",
+            "data": "{\"background\":\"linear-gradient(181deg, #9661bd, #494b9b)\",\"categoryId\":\"1\",\"description\":\"1\",\"name\":\"상품1623133048211\",\"options\":[{\"name\":\"노랑\",\"price\":\"33\",\"quantity\":\"22\"},{\"name\":\"검정\",\"price\":\"33\",\"quantity\":\"22\"}],\"status\":\"OPEN\",\"storeId\":6425}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "id": "detailProduct1",
+        "title": "상품1 상세 조회",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S200",
+        "row": 0,
+        "refTaskId": [
+          "postProduct1"
+        ],
+        "params": {
+          "id": 5328
+        },
+        "res": {
+          "data": {
+            "id": 5328,
+            "name": "상품1623133048211",
+            "description": "1",
+            "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+            "price": 33,
+            "status": "OPEN",
+            "regDate": "2021-06-08T15:17:28.221595",
+            "updateDate": "2021-06-08T15:17:28.221595",
+            "storeId": 6425,
+            "storeName": "스토어-1623133048193",
+            "categoryId": 1,
+            "options": [
+              {
+                "id": 7155,
+                "name": "노랑",
+                "price": 33,
+                "quantity": 22
+              },
+              {
+                "id": 7156,
+                "name": "검정",
+                "price": 33,
+                "quantity": 22
+              }
+            ]
+          },
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/product/detail/5328",
+            "method": "get",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "title": "상품1 수정 - 상태(CLOSE)",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S200",
+        "row": 0,
+        "refTaskId": [
+          "detailProduct1"
+        ],
+        "params": {
+          "id": 5328,
+          "name": "상품1623133048211",
+          "description": "1",
+          "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+          "price": 33,
+          "status": "CLOSE",
+          "regDate": "2021-06-08T15:17:28.221595",
+          "updateDate": "2021-06-08T15:17:28.221595",
+          "storeId": 6425,
+          "storeName": "스토어-1623133048193",
+          "categoryId": 1,
+          "options": [
+            {
+              "id": 7155,
+              "name": "노랑",
+              "price": 33,
+              "quantity": 22
+            },
+            {
+              "id": 7156,
+              "name": "검정",
+              "price": 33,
+              "quantity": 22
+            }
+          ]
+        },
+        "res": {
+          "data": 5328,
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/product",
+            "method": "put",
+            "data": "{\"id\":5328,\"name\":\"상품1623133048211\",\"description\":\"1\",\"background\":\"linear-gradient(181deg, #9661bd, #494b9b)\",\"price\":33,\"status\":\"CLOSE\",\"regDate\":\"2021-06-08T15:17:28.221595\",\"updateDate\":\"2021-06-08T15:17:28.221595\",\"storeId\":6425,\"storeName\":\"스토어-1623133048193\",\"categoryId\":1,\"options\":[{\"id\":7155,\"name\":\"노랑\",\"price\":33,\"quantity\":22},{\"id\":7156,\"name\":\"검정\",\"price\":33,\"quantity\":22}]}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "id": "detailProductUser1",
+        "title": "상품1 상세 조회(사용자)",
+        "login": {
+          "name": "user1"
+        },
+        "row": 1,
+        "check": "S200",
+        "refTaskId": [
+          "postProduct1"
+        ],
+        "params": {
+          "id": 5328
+        },
+        "res": {
+          "data": {
+            "id": 5328,
+            "name": "상품1623133048211",
+            "description": "1",
+            "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+            "price": 33,
+            "status": "CLOSE",
+            "regDate": "2021-06-08T15:17:28.221595",
+            "updateDate": "2021-06-08T15:17:28.293598",
+            "storeId": 6425,
+            "storeName": "스토어-1623133048193",
+            "categoryId": 1,
+            "options": [
+              {
+                "id": 7155,
+                "name": "노랑",
+                "price": 33,
+                "quantity": 22
+              },
+              {
+                "id": 7156,
+                "name": "검정",
+                "price": 33,
+                "quantity": 22
+              }
+            ]
+          },
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/user/product/5328",
+            "method": "get",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjEsInVzZXJuYW1lIjoidXNlcjEiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.c3VCasrt1S-wD4hdUWvEDt5velmUoziUczeZ_Swz3UQ"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "title": "장바구니 추가 실패(상품 상태 CLOSE) - 상품1",
+        "login": {
+          "name": "user1"
+        },
+        "check": "S400",
+        "row": 1,
+        "refTaskId": [
+          "detailProductUser1"
+        ],
+        "params": {
+          "productId": 5328,
+          "cartOptions": [
+            {
+              "id": 7155,
+              "count": 22,
+              "price": 33
+            }
+          ]
+        },
+        "errorRes": {
+          "data": {
+            "message": "상품이 현재 판매불가 상태입니다."
+          },
+          "status": 400,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/user/cart",
+            "method": "post",
+            "data": "{\"productId\":5328,\"cartOptions\":[{\"id\":7155,\"count\":22,\"price\":33}]}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjEsInVzZXJuYW1lIjoidXNlcjEiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.c3VCasrt1S-wD4hdUWvEDt5velmUoziUczeZ_Swz3UQ"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S400",
+        "isPass": true
+      }
+    ]
+  },
+  {
+    "title": "장바구니 추가(옵션 가격 변경)",
+    "taskList": [
+      {
+        "id": "postStore",
+        "title": "스토어 등록",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S200",
+        "row": 0,
+        "params": {
+          "name": "스토어-1623133048369",
+          "status": "OPEN"
+        },
+        "res": {
+          "data": 6426,
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/store",
+            "method": "post",
+            "data": "{\"name\":\"스토어-1623133048369\",\"status\":\"OPEN\"}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "id": "postProduct2",
+        "title": "상품2 등록",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S200",
+        "row": 0,
+        "refTaskId": [
+          "postStore"
+        ],
+        "params": {
+          "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+          "categoryId": "1",
+          "description": "1",
+          "name": "상품1623133048397",
+          "options": [
+            {
+              "name": "노랑",
+              "price": "33",
+              "quantity": "22"
+            },
+            {
+              "name": "검정",
+              "price": "33",
+              "quantity": "22"
+            }
+          ],
+          "status": "OPEN",
+          "storeId": 6426
+        },
+        "res": {
+          "data": 5329,
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/product",
+            "method": "post",
+            "data": "{\"background\":\"linear-gradient(181deg, #9661bd, #494b9b)\",\"categoryId\":\"1\",\"description\":\"1\",\"name\":\"상품1623133048397\",\"options\":[{\"name\":\"노랑\",\"price\":\"33\",\"quantity\":\"22\"},{\"name\":\"검정\",\"price\":\"33\",\"quantity\":\"22\"}],\"status\":\"OPEN\",\"storeId\":6426}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "id": "detailProductUser2",
+        "title": "상품2 상세 조회(사용자)",
+        "login": {
+          "name": "user1"
+        },
+        "row": 1,
+        "check": "S200",
+        "refTaskId": [
+          "postProduct2"
+        ],
+        "params": {
+          "id": 5329
+        },
+        "res": {
+          "data": {
+            "id": 5329,
+            "name": "상품1623133048397",
+            "description": "1",
+            "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+            "price": 33,
+            "status": "OPEN",
+            "regDate": "2021-06-08T15:17:28.408592",
+            "updateDate": "2021-06-08T15:17:28.408592",
+            "storeId": 6426,
+            "storeName": "스토어-1623133048369",
+            "categoryId": 1,
+            "options": [
+              {
+                "id": 7157,
+                "name": "노랑",
+                "price": 33,
+                "quantity": 22
+              },
+              {
+                "id": 7158,
+                "name": "검정",
+                "price": 33,
+                "quantity": 22
+              }
+            ]
+          },
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/user/product/5329",
+            "method": "get",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjEsInVzZXJuYW1lIjoidXNlcjEiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.c3VCasrt1S-wD4hdUWvEDt5velmUoziUczeZ_Swz3UQ"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "id": "detailProduct2",
+        "title": "상품2 상세 조회",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S200",
+        "row": 0,
+        "refTaskId": [
+          "postProduct2"
+        ],
+        "params": {
+          "id": 5329
+        },
+        "res": {
+          "data": {
+            "id": 5329,
+            "name": "상품1623133048397",
+            "description": "1",
+            "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+            "price": 33,
+            "status": "OPEN",
+            "regDate": "2021-06-08T15:17:28.408592",
+            "updateDate": "2021-06-08T15:17:28.408592",
+            "storeId": 6426,
+            "storeName": "스토어-1623133048369",
+            "categoryId": 1,
+            "options": [
+              {
+                "id": 7157,
+                "name": "노랑",
+                "price": 32,
+                "quantity": 22
+              },
+              {
+                "id": 7158,
+                "name": "검정",
+                "price": 33,
+                "quantity": 22
+              }
+            ]
+          },
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/product/detail/5329",
+            "method": "get",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "title": "상품2 수정 - 옵션가격 수정",
+        "login": {
+          "name": "user3"
+        },
+        "check": "S200",
+        "row": 0,
+        "refTaskId": [
+          "detailProduct2"
+        ],
+        "params": {
+          "id": 5329,
+          "name": "상품1623133048397",
+          "description": "1",
+          "background": "linear-gradient(181deg, #9661bd, #494b9b)",
+          "price": 33,
+          "status": "OPEN",
+          "regDate": "2021-06-08T15:17:28.408592",
+          "updateDate": "2021-06-08T15:17:28.408592",
+          "storeId": 6426,
+          "storeName": "스토어-1623133048369",
+          "categoryId": 1,
+          "options": [
+            {
+              "id": 7157,
+              "name": "노랑",
+              "price": 32,
+              "quantity": 22
+            },
+            {
+              "id": 7158,
+              "name": "검정",
+              "price": 33,
+              "quantity": 22
+            }
+          ]
+        },
+        "res": {
+          "data": 5329,
+          "status": 200,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/seller/product",
+            "method": "put",
+            "data": "{\"id\":5329,\"name\":\"상품1623133048397\",\"description\":\"1\",\"background\":\"linear-gradient(181deg, #9661bd, #494b9b)\",\"price\":33,\"status\":\"OPEN\",\"regDate\":\"2021-06-08T15:17:28.408592\",\"updateDate\":\"2021-06-08T15:17:28.408592\",\"storeId\":6426,\"storeName\":\"스토어-1623133048369\",\"categoryId\":1,\"options\":[{\"id\":7157,\"name\":\"노랑\",\"price\":32,\"quantity\":22},{\"id\":7158,\"name\":\"검정\",\"price\":33,\"quantity\":22}]}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjMsInVzZXJuYW1lIjoidXNlcjMiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.sr7q8HVvqXTaRDTGdjWuIdfKKMQDq9pQmngxVFKLD1M"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S200",
+        "isPass": true
+      },
+      {
+        "title": "장바구니 추가 실패(옵션 가격 변경됨) - 상품2",
+        "login": {
+          "name": "user1"
+        },
+        "check": "S400",
+        "row": 1,
+        "refTaskId": [
+          "detailProductUser2"
+        ],
+        "params": {
+          "productId": 5329,
+          "cartOptions": [
+            {
+              "id": 7157,
+              "count": 22,
+              "price": 33
+            }
+          ]
+        },
+        "errorRes": {
+          "data": {
+            "message": "옵션의 판매가가 변경되었습니다. 화면을 새로고침해주세요."
+          },
+          "status": 400,
+          "statusText": "",
+          "headers": {
+            "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+            "content-type": "application/json",
+            "expires": "0",
+            "pragma": "no-cache"
+          },
+          "config": {
+            "url": "/api/secure/user/cart",
+            "method": "post",
+            "data": "{\"productId\":5329,\"cartOptions\":[{\"id\":7157,\"count\":22,\"price\":33}]}",
+            "headers": {
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjMxMzMwNDcsImV4cCI6MTYyNTcyNTA0NywiaWQiOjEsInVzZXJuYW1lIjoidXNlcjEiLCJyb2xlcyI6WyJST0xFX1NFTExFUiIsIlJPTEVfVVNFUiJdfQ.c3VCasrt1S-wD4hdUWvEDt5velmUoziUczeZ_Swz3UQ"
+            },
+            "baseURL": "http://localhost:8080",
+            "transformRequest": [
+              null
+            ],
+            "transformResponse": [
+              null
+            ],
+            "timeout": 5000,
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1,
+            "maxBodyLength": -1
+          },
+          "request": {}
+        },
+        "checkName": "S400",
+        "isPass": true
+      }
+    ]
+  }
+]
